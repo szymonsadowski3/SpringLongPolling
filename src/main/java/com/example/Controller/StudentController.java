@@ -4,10 +4,14 @@ import com.example.Entity.Student;
 import com.example.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.awt.*;
 import java.util.Collection;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @RestController
 @RequestMapping("/students")
@@ -24,6 +28,11 @@ public class StudentController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Student getStudentById(@PathVariable("id") int id) {
         return studentService.getStudentById(id);
+    }
+
+    @RequestMapping(value = "/ab", method = RequestMethod.GET)
+    public String cos() {
+        return "dupa";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

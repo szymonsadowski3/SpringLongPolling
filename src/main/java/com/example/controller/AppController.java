@@ -9,7 +9,10 @@ import com.example.poll.core.Supervisor;
 import com.example.poll.implementations.NewNotificationResolver;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/test")
@@ -27,6 +30,11 @@ public class AppController {
         DeferredJSON result = new DeferredJSON(resolver);
         supervisor.add(result);
         return result;
+    }
+
+    @RequestMapping(value = "/notifications", method = RequestMethod.GET)
+    public List<Notification> getNotifications() {
+        return notificationService.getNotifications();
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

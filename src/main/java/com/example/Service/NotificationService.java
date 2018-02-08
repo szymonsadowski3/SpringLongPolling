@@ -5,6 +5,8 @@ import com.example.entity.Notification;
 import com.example.poll.implementations.NewNotificationResolver;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NotificationService {
     private NewNotificationResolver subscriber;
@@ -33,5 +35,9 @@ public class NotificationService {
         if(subscriber != null) {
             subscriber.update();
         }
+    }
+
+    public List<Notification> getNotifications() {
+        return notificationDao.getNotifications();
     }
 }

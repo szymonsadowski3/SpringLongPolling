@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.List;
+
 @Repository
 public class NotificationDao {
     private Sql2o sql2o = new Sql2o("jdbc:mysql://mysql.agh.edu.pl:3306/sadowski", "sadowski", "xPjFWAM00pYfJAP6");
@@ -29,6 +31,15 @@ public class NotificationDao {
 
             return con.createQuery(query)
                     .executeAndFetch(Notification.class).get(0);
+        }
+    }
+
+    public List<Notification> getNotifications() {
+        try (Connection con = sql2o.open()) {
+            final String query = "SELECT * FROM notification";
+
+            return con.createQuery(query)
+                    .executeAndFetch(Notification.class);
         }
     }
 

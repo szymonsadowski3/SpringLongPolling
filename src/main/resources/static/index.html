@@ -15,15 +15,15 @@
         <div ng-repeat="notification in notificationList.notifications">
             <div class="card text-center">
                 <div class="card-header">
-                    {{notification.authorId}}
+                    {{notification.authorName}}
                 </div>
                 <div class="card-block">
-                    <h4 class="card-title">Special title treatment</h4>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <h4 class="card-title">{{notification.tite}}</h4>
+                    <p class="card-text">{{notification.content}}</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
                 <div class="card-footer text-muted">
-                    2 days ago
+                    {{notification.createdOn}}
                 </div>
             </div>
         </div>

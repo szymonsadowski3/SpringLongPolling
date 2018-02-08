@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class Notification {
     private int notificationId;
@@ -9,13 +10,14 @@ public class Notification {
     private int groupId;
     private int importance;
     private int authorId;
+    private String title;
     private String authorName;
 
 //    public Notification() {
 //    }
 
     public Notification(int notificationId, Timestamp createdOn, String content,
-                        int groupId, int importance, int authorId, String authorName) {
+                        int groupId, int importance, int authorId, String authorName, String title) {
         this.notificationId = notificationId;
         this.createdOn = createdOn;
         this.content = content;
@@ -23,6 +25,7 @@ public class Notification {
         this.importance = importance;
         this.authorId = authorId;
         this.authorName = authorName;
+        this.title = title;
     }
 
     public int getNotificationId() {
@@ -33,8 +36,10 @@ public class Notification {
         this.notificationId = notificationId;
     }
 
-    public Timestamp getCreatedOn() {
-        return createdOn;
+    public String getCreatedOn() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        return createdOn;
+        return dateFormat.format(createdOn);
     }
 
     public void setCreatedOn(Timestamp createdOn) {
@@ -81,16 +86,13 @@ public class Notification {
         this.authorName = authorName;
     }
 
-    @Override
-    public String toString() {
-        return "Notification{" +
-                "notificationId=" + notificationId +
-                ", createdOn=" + createdOn +
-                ", content='" + content + '\'' +
-                ", groupId=" + groupId +
-                ", importance=" + importance +
-                ", authorId=" + authorId +
-                ", authorName='" + authorName + '\'' +
-                '}';
+    public String getTitle() {
+        return title;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
 }

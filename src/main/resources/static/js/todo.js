@@ -1,9 +1,24 @@
+var notificationsUrl = '/api/notifications';
+
 angular.module('todoApp', [])
-    .controller('TodoListController', function () {
+    .controller('TodoListController', ['$scope','$http', function ($scope, $http) {
         var todoList = this;
-        todoList.todos = [
-            {text: 'learn AngularJS', done: true},
-            {text: 'build an AngularJS app', done: false}];
+
+        $http.get(notificationsUrl, {})
+            .then(
+                function(response) {
+                    // success callback
+                    todoList.todos = response;
+                },
+                function(response) {
+                    // failure call back
+                    todoList.todos = [];
+                }
+            );
+
+        // todoList.todos = [
+        //     {text: 'learn AngularJS', done: true},
+        //     {text: 'build an AngularJS app', done: false}];
 
         todoList.addTodo = function () {
             todoList.todos.push({text: todoList.todoText, done: false});
@@ -25,4 +40,4 @@ angular.module('todoApp', [])
                 if (!todo.done) todoList.todos.push(todo);
             });
         };
-    });
+    }]);

@@ -7,14 +7,17 @@ import org.sql2o.Sql2o;
 
 @Repository
 public class NotificationDao {
-    Sql2o sql2o = new Sql2o("jdbc:mysql://mysql.agh.edu.pl:3306/sadowski", "sadowski", "xPjFWAM00pYfJAP6");
+    private Sql2o sql2o = new Sql2o("jdbc:mysql://mysql.agh.edu.pl:3306/sadowski", "sadowski", "xPjFWAM00pYfJAP6");
 
-    public void insertNotificationToDb(String content) {
-        String insertSql = "INSERT into notification VALUES(null, :content)";
+    public void insertNotification(String content, int groupId, int importance, int authorId) {
+        String insertSql = "INSERT into notification VALUES(null, :content, :groupId, :importance, :authorId, null)";
 
         try (Connection con = sql2o.open()) {
             con.createQuery(insertSql)
                     .addParameter("content", content)
+                    .addParameter("groupId", groupId)
+                    .addParameter("importance", importance)
+                    .addParameter("authorId", authorId)
                     .executeUpdate();
         }
     }
@@ -22,7 +25,7 @@ public class NotificationDao {
 
     public Notification getNewestNotification() {
         try (Connection con = sql2o.open()) {
-            final String query = "SELECT * FROM notification ORDER BY ts DESC LIMIT 1";
+            final String query = "SELECT * FROM notification ORDER BY createdOn DESC LIMIT 1";
 
             return con.createQuery(query)
                     .executeAndFetch(Notification.class).get(0);

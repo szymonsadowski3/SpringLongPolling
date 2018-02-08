@@ -1,16 +1,15 @@
 package com.example.controller;
 
+import com.example.Service.AppUserService;
+import com.example.Service.GroupService;
 import com.example.Service.NotificationService;
+import com.example.entity.Notification;
 import com.example.poll.core.DeferredJSON;
-import com.example.poll.core.Resolver;
 import com.example.poll.core.Supervisor;
 import com.example.poll.implementations.NewNotificationResolver;
-import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/test")
@@ -19,6 +18,8 @@ public class AppController {
     private NewNotificationResolver resolver = new NewNotificationResolver();
 
     private NotificationService notificationService = new NotificationService(resolver);
+    private GroupService groupService = new GroupService();
+    private AppUserService appUserService = new AppUserService();
 
     @RequestMapping(value = "/newNotification", method = RequestMethod.GET)
     public @ResponseBody
@@ -28,10 +29,10 @@ public class AppController {
         return result;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void insertStudent(@RequestBody String notificationContent) {
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void insertNotification(@RequestBody Notification notification) {
         try {
-            notificationService.insertNotificationToDb(notificationContent);
+            notificationService.insertNotification(notification);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,13 +1,14 @@
 package com.example.Service;
 
 import com.example.dao.NotificationDao;
+import com.example.entity.Notification;
 import com.example.poll.implementations.NewNotificationResolver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NotificationService {
     private NewNotificationResolver subscriber;
+    private NotificationDao notificationDao = new NotificationDao();
 
     public NotificationService() {
 
@@ -21,14 +22,13 @@ public class NotificationService {
         this.subscriber = subscriber;
     }
 
-    private NotificationDao notificationDao = new NotificationDao();
-
     public String getNewestNotification() {
         return notificationDao.getNewestNotification().toString();
     }
 
-    public void insertNotificationToDb(String notification) {
-        notificationDao.insertNotificationToDb(notification);
+    public void insertNotification(Notification notification) {
+        notificationDao.insertNotification(notification.getContent(), notification.getGroupId(),
+                notification.getImportance(), notification.getAuthorId());
 
         if(subscriber != null) {
             subscriber.update();

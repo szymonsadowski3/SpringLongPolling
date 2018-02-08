@@ -22,8 +22,12 @@ public class NotificationDao {
         return conn;
     }
 
-    public NotificationDao() throws Exception {
-        this.dbConnection = getMySqlConnection();
+    public NotificationDao() {
+        try {
+            this.dbConnection = getMySqlConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void insertNotificationToDb(String notification) throws Exception {
@@ -33,7 +37,7 @@ public class NotificationDao {
     }
 
     public String getNewestNotification() throws Exception {
-        PreparedStatement statement = dbConnection.prepareStatement("SELECT content FROM notification ORDER BY ts LIMIT 1");
+        PreparedStatement statement = dbConnection.prepareStatement("SELECT content FROM notification ORDER BY ts DESC LIMIT 1");
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             return resultSet.getString(1);

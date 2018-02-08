@@ -21,8 +21,7 @@ public class NotificationService {
         this.subscriber = subscriber;
     }
 
-    @Autowired
-    private NotificationDao notificationDao;
+    private NotificationDao notificationDao = new NotificationDao();
 
     public String getNewestNotification() throws Exception {
         return notificationDao.getNewestNotification();

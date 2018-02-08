@@ -23,11 +23,11 @@ public class NotificationService {
 
     private NotificationDao notificationDao = new NotificationDao();
 
-    public String getNewestNotification() throws Exception {
-        return notificationDao.getNewestNotification();
+    public String getNewestNotification() {
+        return notificationDao.getNewestNotification().toString();
     }
 
-    public void insertNotificationToDb(String notification) throws Exception {
+    public void insertNotificationToDb(String notification) {
         notificationDao.insertNotificationToDb(notification);
 
         if(subscriber != null) {

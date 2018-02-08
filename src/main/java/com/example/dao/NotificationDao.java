@@ -1,48 +1,35 @@
 package com.example.dao;
 
+import com.example.entity.Notification;
 import org.springframework.stereotype.Repository;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
 @Repository
 public class NotificationDao {
-    private Connection dbConnection;
+    Sql2o sql2o = new Sql2o("jdbc:mysql://mysql.agh.edu.pl:3306/sadowski", "sadowski", "xPjFWAM00pYfJAP6");
 
-    private static Connection getMySqlConnection() throws Exception {
-        String driver = "org.gjt.mm.mysql.Driver";
-        String url = "jdbc:mysql://mysql.agh.edu.pl:3306/sadowski";
-        String username = "sadowski";
-        String password = "xPjFWAM00pYfJAP6";
+    public void insertNotificationToDb(String content) {
+        String insertSql = "INSERT into notification VALUES(null, :content)";
 
-        Class.forName(driver);
-        Connection conn = DriverManager.getConnection(url, username, password);
-        return conn;
-    }
-
-    public NotificationDao() {
-        try {
-            this.dbConnection = getMySqlConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
+        try (Connection con = sql2o.open()) {
+            con.createQuery(insertSql)
+                    .addParameter("content", content)
+                    .executeUpdate();
         }
     }
 
-    public void insertNotificationToDb(String notification) throws Exception {
-        PreparedStatement statement = dbConnection.prepareStatement("INSERT into notification VALUES(null, ?)");
-        statement.setString(1, notification);
-        statement.executeUpdate();
+
+    public Notification getNewestNotification() {
+        try (Connection con = sql2o.open()) {
+            final String query = "SELECT * FROM notification ORDER BY ts DESC LIMIT 1";
+
+            return con.createQuery(query)
+                    .executeAndFetch(Notification.class).get(0);
+        }
     }
 
-    public String getNewestNotification() throws Exception {
-        PreparedStatement statement = dbConnection.prepareStatement("SELECT content FROM notification ORDER BY ts DESC LIMIT 1");
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-            return resultSet.getString(1);
-        } else {
-            return "";
-        }
+    public static void main(String[] args) {
+        System.out.println(new NotificationDao().getNewestNotification());
     }
 }

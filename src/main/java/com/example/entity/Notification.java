@@ -1,7 +1,10 @@
 package com.example.entity;
 
+import java.sql.Timestamp;
+
 public class Notification {
-    String content;
+    public String content;
+    public Timestamp ts;
 
     public Notification(String content) {
         this.content = content;
@@ -13,5 +16,13 @@ public class Notification {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Notification{" +
+                "content='" + content + '\'' +
+                ", ts=" + ts +
+                '}';
     }
 }

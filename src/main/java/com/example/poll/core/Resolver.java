@@ -1,4 +1,4 @@
-package com.example.poll;
+package com.example.poll.core;
 
 import org.json.simple.JSONObject;
 

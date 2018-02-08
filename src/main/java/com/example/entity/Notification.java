@@ -37,7 +37,7 @@ public class Notification {
     }
 
     public String getCreatedOn() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 //        return createdOn;
         return dateFormat.format(createdOn);
     }

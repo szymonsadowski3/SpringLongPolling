@@ -45,7 +45,7 @@ public class NotificationDao {
 
     public List<Notification> getNotificationsWithAuthorNames() {
         try (Connection con = sql2o.open()) {
-            final String query = "SELECT notificationId, content, groupId, importance, authorId, createdOn, username as authorName FROM notification JOIN app_user ON (notification.authorId = app_user.userId)";
+            final String query = "SELECT notificationId, content, groupId, importance, authorId, createdOn, title, username as authorName FROM notification JOIN app_user ON (notification.authorId = app_user.userId)";
 
             return con.createQuery(query)
                     .executeAndFetch(Notification.class);

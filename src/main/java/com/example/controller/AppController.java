@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.Service.AppUserService;
 import com.example.Service.GroupService;
 import com.example.Service.NotificationService;
+import com.example.entity.AppUser;
 import com.example.entity.Notification;
 import com.example.poll.core.DeferredJSON;
 import com.example.poll.core.Supervisor;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/api")
 public class AppController {
     private Supervisor supervisor = new Supervisor();
     private NewNotificationResolver resolver = new NewNotificationResolver();
@@ -35,6 +36,11 @@ public class AppController {
     @RequestMapping(value = "/notifications", method = RequestMethod.GET)
     public List<Notification> getNotifications() {
         return notificationService.getNotifications();
+    }
+
+    @RequestMapping(value = "/user/{userid}", method = RequestMethod.GET)
+    public AppUser getUser(@PathVariable("userid") int userid) {
+        return appUserService.readAppUser(userid);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

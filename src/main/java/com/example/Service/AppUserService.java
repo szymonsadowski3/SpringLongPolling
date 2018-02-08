@@ -11,7 +11,7 @@ public class AppUserService {
         appUserDao.createAppUser(appUser.getUsername());
     }
 
-    public Group readAppUser(int userId) {
+    public AppUser readAppUser(int userId) {
         return appUserDao.readAppUser(userId);
     }
 

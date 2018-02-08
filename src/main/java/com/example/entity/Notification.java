@@ -9,26 +9,20 @@ public class Notification {
     private int groupId;
     private int importance;
     private int authorId;
+    private String authorName;
 
-    public Notification() {
-    }
+//    public Notification() {
+//    }
 
-    public Notification(int notificationId, Timestamp createdOn, String content, int groupId, int importance, int authorId) {
+    public Notification(int notificationId, Timestamp createdOn, String content,
+                        int groupId, int importance, int authorId, String authorName) {
         this.notificationId = notificationId;
         this.createdOn = createdOn;
         this.content = content;
         this.groupId = groupId;
         this.importance = importance;
         this.authorId = authorId;
-    }
-
-    public Notification(String content, int groupId, int importance, int authorId) {
-        this.notificationId = notificationId;
-        this.createdOn = createdOn;
-        this.content = content;
-        this.groupId = groupId;
-        this.importance = importance;
-        this.authorId = authorId;
+        this.authorName = authorName;
     }
 
     public int getNotificationId() {
@@ -79,6 +73,14 @@ public class Notification {
         this.authorId = authorId;
     }
 
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
     @Override
     public String toString() {
         return "Notification{" +
@@ -88,6 +90,7 @@ public class Notification {
                 ", groupId=" + groupId +
                 ", importance=" + importance +
                 ", authorId=" + authorId +
+                ", authorName='" + authorName + '\'' +
                 '}';
     }
 }

@@ -38,6 +38,6 @@ public class NotificationService {
     }
 
     public List<Notification> getNotifications() {
-        return notificationDao.getNotifications();
+        return notificationDao.getNotificationsWithAuthorNames();
     }
 }

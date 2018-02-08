@@ -4,20 +4,30 @@
     <script src="/js/angular.min.js"></script>
     <script src="/js/todo.js"></script>
     <link rel="stylesheet" href="/css/todo.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
 <h2>Todo</h2>
 <div ng-controller="NotificationListController as notificationList">
-    <span>{{notificationList.remaining()}} of {{notificationList.todos.length}} remaining</span>
+    <span>{{notificationList.remaining()}} of {{notificationList.notifications.length}} remaining</span>
     [ <a href="" ng-click="notificationList.archive()">archive</a> ]
-    <ul class="unstyled">
-        <li ng-repeat="todo in notificationList.todos">
-            <label class="checkbox">
-                <input type="checkbox" ng-model="todo.done">
-                <span class="done-{{todo.done}}">{{todo.text}}</span>
-            </label>
-        </li>
-    </ul>
+    <div class="container">
+        <div ng-repeat="notification in notificationList.notifications">
+            <div class="card text-center">
+                <div class="card-header">
+                    {{notification.authorId}}
+                </div>
+                <div class="card-block">
+                    <h4 class="card-title">Special title treatment</h4>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                <div class="card-footer text-muted">
+                    2 days ago
+                </div>
+            </div>
+        </div>
+    </div>
     <form ng-submit="notificationList.addTodo()">
         <input type="text" ng-model="notificationList.todoText"  size="30"
                placeholder="add new todo here">

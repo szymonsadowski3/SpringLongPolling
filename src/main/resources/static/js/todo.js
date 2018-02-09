@@ -4,6 +4,7 @@ angular.module('todoApp', [])
     .controller('NotificationListController', ['$scope','$http', function ($scope, $http) {
         var notificationList = this;
 
+        $("#spinner").show();
         $http.get(notificationsUrl, {})
             .then(
                 function(response) {
@@ -12,6 +13,7 @@ angular.module('todoApp', [])
 
                     notificationList.notifications = response.data;
                     console.dir(notificationList.notifications);
+                    $("#spinner").hide();
                 },
                 function(response) {
                     // failure call back

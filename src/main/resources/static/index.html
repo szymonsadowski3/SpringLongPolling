@@ -1,6 +1,10 @@
 <!doctype html>
 <html ng-app="todoApp">
 <head>
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
     <script src="/js/angular.min.js"></script>
     <script src="/js/todo.js"></script>
     <link rel="stylesheet" href="/css/todo.css">
@@ -12,6 +16,7 @@
     <span>{{notificationList.remaining()}} of {{notificationList.notifications.length}} remaining</span>
     [ <a href="" ng-click="notificationList.archive()">archive</a> ]
     <div class="container">
+        <img id="spinner" ng-src="img/spinner.gif" style="display:none;">
         <div ng-repeat="notification in notificationList.notifications">
             <div class="card text-center">
                 <div class="card-header">

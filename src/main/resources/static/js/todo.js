@@ -1,5 +1,20 @@
 var notificationsUrl = '/api/notifications';
 
+var monthMapping = {
+    "01": "January",
+    "02": "February",
+    "03": "March",
+    "04": "April",
+    "05": "May",
+    "06": "June",
+    "07": "July",
+    "08": "August",
+    "09": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December"
+};
+
 angular.module('todoApp', [])
     .controller('NotificationListController', ['$scope','$http', function ($scope, $http) {
         var notificationList = this;
@@ -12,6 +27,13 @@ angular.module('todoApp', [])
                     var responseData = response.data;
 
                     notificationList.notifications = response.data;
+                    notificationList.notifications.forEach(function(obj) {
+                        var dateString = obj.createdOn.split(' ')[0];
+                        var dateSplitted = dateString.split('-');
+                        obj.day = dateSplitted[0];
+                        obj.month = monthMapping[dateSplitted[1]];
+                        obj.year = dateSplitted[2];
+                    });
                     console.dir(notificationList.notifications);
                     $("#spinner").hide();
                 },

@@ -16,6 +16,10 @@ public class NewNotificationResolver implements Resolver {
         this.isNewNotification = true;
     }
 
+    public void setToFalse() {
+        this.isNewNotification = false;
+    }
+
 
     @Override
     public Optional<JSONObject> resolve() {
@@ -24,7 +28,19 @@ public class NewNotificationResolver implements Resolver {
         } else {
             try {
                 Notification newNotification = notificationService.getNewestNotification();
-                isNewNotification = false;
+
+                NewNotificationResolver nnr = this;
+
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                nnr.setToFalse();
+                            }
+                        },
+                        500
+                );
+
                 return Optional.of(newNotification.toJSONObject());
             } catch (Exception e) {
                 e.printStackTrace();

@@ -109,7 +109,7 @@ public class AppController {
         return jsonObj;
     }
 
-    @Scheduled(fixedRate = 100)
+    @Scheduled(fixedRate = 500)
     public void processQueues() {
         supervisor.processQueues();
     }

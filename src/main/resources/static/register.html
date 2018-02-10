@@ -3,20 +3,20 @@
     <div class="container">
         <div class="loginContainer">
             <form class="form-signin">
-                <img class="mb-4 img-responsive" src="/img/notification.png" alt="" width="72" height="72" style="display: block; margin:0 auto;">
-                <h2 class="text-center">Register</h2>
+                <img class="mb-3 img-responsive" src="/img/notification.png" alt="" width="72" height="72" style="display: block; margin:0 auto;">
+                <h2 class="mb-2 text-center">Register</h2>
                 <div id="registerForm">
                     <div class="input">
                         <label class="sr-only">Username</label>
                         <input type="text" ng-model="reg_username" placeholder="Username" class="form-control">
                     </div>
-                    <div class="input">
+                    <div class="input mt-2">
                         <label class="sr-only">Password</label>
                         <input type="Password" ng-model="reg_password" placeholder="Password" class="form-control">
                     </div>
                     <div class="input">
                         <button ng-click="register()" class="btn btn-primary">Register</button>
-                        <button onclick="window.history.back()" class="btn btn-primary">Back</button>
+                        <button onclick="window.history.back()" class="btn btn-primary d-block mt-2">Back</button>
                     </div>
                 </div>
             </form>

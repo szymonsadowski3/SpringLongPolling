@@ -1,11 +1,37 @@
-<div id="loginForm">
-    <div class="input">
-        <input type="text" ng-model="username" placeholder="Username">
-    </div>
-    <div class="input">
-        <input type="Password" ng-model="password" placeholder="Password">
-    </div>
-    <div class="input">
-        <button ng-click="login()">Login</button>
+<!--<div id="loginForm">-->
+    <!--<div class="input">-->
+        <!--<input type="text" ng-model="username" placeholder="Username">-->
+    <!--</div>-->
+    <!--<div class="input">-->
+        <!--<input type="Password" ng-model="password" placeholder="Password">-->
+    <!--</div>-->
+    <!--<div class="input">-->
+        <!--<button ng-click="login()">Login</button>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="jumbotron vertical-center"> <!--
+                      ^--- Added class  -->
+    <div class="container">
+        <div class="loginContainer">
+            <form class="form-signin">
+                <img class="mb-4 img-responsive" src="/img/notification.png" alt="" width="72" height="72" style="display: block; margin:0 auto;">
+                <h2 class="text-center">Log In</h2>
+                <div id="loginForm">
+                    <div class="input">
+                        <label class="sr-only">Username</label>
+                        <input class="form-control" type="text" ng-model="username" placeholder="Username">
+                    </div>
+                    <div class="input">
+                        <label class="sr-only">Password</label>
+                        <input class="form-control" type="Password" ng-model="password" placeholder="Password">
+                    </div>
+                    <div class="input">
+                        <button ng-click="login()" class="btn btn-primary">Login</button>
+                        <button ng-click="goToRegister()" class="btn btn-primary d-block mt-2">Go To Register</button>
+                    </div>
+                </div>
+                <p class="mt-2 mb-3 text-muted">&copy; 2018</p>
+            </form>
+        </div>
     </div>
 </div>

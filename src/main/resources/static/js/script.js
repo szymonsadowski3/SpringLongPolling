@@ -26,8 +26,8 @@ var backgroundClassMapping = {
 
 app.config(function ($routeProvider) {
     $routeProvider.when('/', {
-        templateUrl: '/home.html',
-        controller: 'homeCtrl'
+        templateUrl: '/login.html',
+        controller: 'loginCtrl'
     }).when('/login', {
         templateUrl: '/login.html',
         controller: 'loginCtrl'
@@ -55,16 +55,20 @@ app.config(function ($routeProvider) {
         })
 });
 
-app.controller('homeCtrl', function ($scope, $location) {
-    $scope.goToLogin = function () {
-        $location.path('/login');
-    };
-    $scope.register = function () {
-        $location.path('/register');
-    }
-});
+// app.controller('homeCtrl', function ($scope, $location) {
+//     $scope.goToLogin = function () {
+//         $location.path('/login');
+//     };
+//     $scope.register = function () {
+//         $location.path('/register');
+//     }
+// });
 
 app.controller('loginCtrl', ["$scope", "$http", "$location", "user", function ($scope, $http, $location, user) {
+    $scope.goToRegister = function () {
+        $location.path('/register');
+    };
+
     $scope.login = function () {
         var username = $scope.username;
         var password = $scope.password;

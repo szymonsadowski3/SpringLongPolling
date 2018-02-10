@@ -8,6 +8,13 @@ app.config(function($routeProvider) {
         templateUrl: '/login.html',
         controller: 'loginCtrl'
     }).when('/dashboard', {
+        resolve: {
+            check: function($location, user) {
+                if(!user.isUserLoggedIn()) {
+                    $location.path('/login');
+                }
+            },
+        },
         templateUrl: '/dashboard.html',
         controller: 'dashboardCtrl'
     })
@@ -41,6 +48,7 @@ app.controller('loginCtrl', ["$scope", "$http", "$location", "user", function($s
             if(response.data.authorized) {
                 user.userLoggedIn();
                 user.setName(response.data.user);
+                user.setToken(response.data.token);
                 $location.path('/dashboard');
             } else {
                 alert('invalid login');
@@ -52,7 +60,7 @@ app.controller('loginCtrl', ["$scope", "$http", "$location", "user", function($s
 app.service('user', function() {
     var username;
     var loggedin = false;
-    var id;
+    var token;
 
     this.setName = function(name) {
         username = name;
@@ -61,12 +69,12 @@ app.service('user', function() {
         return username;
     };
 
-    // this.setID = function(userID) {
-    //     id = userID;
-    // };
-    // this.getID = function() {
-    //     return id;
-    // };
+    this.setToken = function(tokenToSet) {
+        token = tokenToSet;
+    };
+    this.getToken = function() {
+        return token;
+    };
 
     this.isUserLoggedIn = function() {
         return loggedin;

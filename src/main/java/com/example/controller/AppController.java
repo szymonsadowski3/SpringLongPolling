@@ -9,6 +9,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.Service.AppUserService;
 import com.example.Service.GroupService;
 import com.example.Service.NotificationService;
+import com.example.auth.Authorizer;
 import com.example.entity.AppUser;
 import com.example.entity.Notification;
 import com.example.poll.core.DeferredJSON;
@@ -48,18 +49,9 @@ public class AppController {
 //    }
 
     @RequestMapping(value = "/notifications", method = RequestMethod.GET)
-    public List<Notification> getNotifications(@RequestParam("token") String token) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256("secret");
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .withIssuer("auth0")
-                    .build(); //Reusable verifier instance
-            DecodedJWT jwt = verifier.verify(token);
+    public List<Notification> getNotifications(@RequestParam("token") String token, @RequestParam("user") String user) {
+        if (Authorizer.verifyToken(token, user)) {
             return notificationService.getNotifications();
-        } catch (UnsupportedEncodingException exception){
-            //UTF-8 encoding not supported
-        } catch (JWTVerificationException exception){
-            //Invalid signature/claims
         }
 
         return null;
@@ -68,6 +60,24 @@ public class AppController {
     @RequestMapping(value = "/user/{userid}", method = RequestMethod.GET)
     public AppUser getUser(@PathVariable("userid") int userid) {
         return appUserService.readAppUser(userid);
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    public JSONObject createUser(@RequestBody MultiValueMap<String,String> formData) {
+        JSONObject response = new JSONObject();
+
+        String username = formData.getFirst("username");
+        String password = formData.getFirst("password");
+
+        boolean wasSuccess = appUserService.createAppUser(username, password);
+
+        String jwToken = Authorizer.generateToken(username);
+
+        response.put("success", wasSuccess);
+        response.put("token", jwToken);
+        response.put("user", username);
+
+        return response;
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -82,19 +92,19 @@ public class AppController {
     @RequestMapping(value="/login",method=RequestMethod.POST)
     public JSONObject createRole(@RequestBody MultiValueMap<String,String> formData){
         JSONObject jsonObj = new JSONObject();
-        jsonObj.put("authorized", true);
-        jsonObj.put("user", "admin");
 
-        try {
-            Algorithm algorithm = Algorithm.HMAC256("secret");
-            String token = JWT.create()
-                    .withIssuer("auth0")
-                    .sign(algorithm);
+        String username = formData.getFirst("username");
+        String password = formData.getFirst("password");
 
-            jsonObj.put("token", token);
-        } catch (UnsupportedEncodingException exception){
-            //UTF-8 encoding not supported
+        if(appUserService.verifyAppUser(username, password)) {
+            jsonObj.put("authorized", true);
+            String jwToken = Authorizer.generateToken(username);
+            jsonObj.put("token", jwToken);
+        } else {
+            jsonObj.put("authorized", false);
         }
+
+        jsonObj.put("user", username);
 
         return jsonObj;
     }

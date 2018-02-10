@@ -3,19 +3,47 @@ package com.example.dao;
 import com.example.connectivity.DbConnection;
 import com.example.entity.AppUser;
 import com.example.entity.Group;
+import com.example.external.BCrypt;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import java.util.List;
 
 public class AppUserDao {
     private Sql2o sql2o = DbConnection.getInstance();
 
-    public void createAppUser(String username) {
-        String insertSql = "INSERT into app_user VALUES(null, :username)";
-
+    public boolean createAppUser(String username, String hashed) {
         try (Connection con = sql2o.open()) {
-            con.createQuery(insertSql)
+            final String query =
+                    "SELECT * FROM app_user WHERE username = :username";
+
+            int usersLength = con.createQuery(query)
                     .addParameter("username", username)
-                    .executeUpdate();
+                    .executeAndFetch(AppUser.class).size();
+
+            if (usersLength > 0) {
+                return false;
+            } else {
+                String insertSql = "INSERT into app_user VALUES(null, :username, :hashed)";
+                con.createQuery(insertSql)
+                        .addParameter("username", username)
+                        .addParameter("hashed", hashed)
+                        .executeUpdate();
+
+                return true;
+            }
+        }
+    }
+
+    public boolean verifyAppUser(String username, String password) {
+        try (Connection con = sql2o.open()) {
+            final String query = "SELECT * FROM app_user WHERE username = :username";
+
+            AppUser fetchedUser = con.createQuery(query)
+                    .addParameter("username", username)
+                    .executeAndFetch(AppUser.class).get(0);
+
+            return BCrypt.checkpw(password, fetchedUser.getHashed());
         }
     }
 

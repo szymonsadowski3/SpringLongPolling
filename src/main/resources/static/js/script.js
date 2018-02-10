@@ -7,15 +7,21 @@ app.config(function($routeProvider) {
     }).when('/login', {
         templateUrl: '/login.html',
         controller: 'loginCtrl'
+    }).when('/register', {
+        templateUrl: '/register.html',
+        controller: 'registerCtrl'
     }).when('/dashboard', {
         resolve: {
             check: function($location, user) {
                 if(!user.isUserLoggedIn()) {
                     $location.path('/login');
                 }
-            },
+            }
         },
         templateUrl: '/dashboard.html',
+        controller: 'dashboardCtrl'
+    }).when('/errorCreateUser', {
+        templateUrl: '/errorCreateUser.html',
         controller: 'dashboardCtrl'
     })
         .otherwise({
@@ -86,5 +92,29 @@ app.service('user', function() {
 
 app.controller('dashboardCtrl', function($scope, user) {
     $scope.user = user.getName();
-
 });
+
+app.controller('registerCtrl', ["$scope", "$http", "$location", "user", function($scope, $http, $location, user) {
+    $scope.register = function() {
+        var username = $scope.reg_username;
+        var password = $scope.reg_password;
+        $http({
+            url: 'http://localhost:8080/api/user',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: 'username='+username+'&password='+password
+        }).then(function(response) {
+            console.dir(response);
+            if(response.data.success) {
+                user.userLoggedIn();
+                user.setName(response.data.user);
+                user.setToken(response.data.token);
+                $location.path('/dashboard');
+            } else {
+                $location.path('/errorCreateUser');
+            }
+        })
+    }
+}]);

@@ -11,30 +11,27 @@ public class Notification {
     private String content;
     private int groupId;
     private int importance;
-    private int authorId;
     private String title;
     private String authorName;
 
     public Notification() {
     }
 
-    public Notification(String content, int groupId, int importance, int authorId, String title) {
+    public Notification(String content, int groupId, int importance, String title) {
         this.content = content;
         this.groupId = groupId;
         this.importance = importance;
-        this.authorId = authorId;
         this.authorName = authorName;
         this.title = title;
     }
 
     public Notification(int notificationId, Timestamp createdOn, String content,
-                        int groupId, int importance, int authorId, String authorName, String title) {
+                        int groupId, int importance, String authorName, String title) {
         this.notificationId = notificationId;
         this.createdOn = createdOn;
         this.content = content;
         this.groupId = groupId;
         this.importance = importance;
-        this.authorId = authorId;
         this.authorName = authorName;
         this.title = title;
     }
@@ -80,14 +77,6 @@ public class Notification {
         this.importance = importance;
     }
 
-    public int getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
-    }
-
     public String getAuthorName() {
         return authorName;
     }
@@ -111,7 +100,6 @@ public class Notification {
         json.put("content", getContent());
         json.put("groupId", getGroupId());
         json.put("importance", getImportance());
-        json.put("authorId", getAuthorId());
         json.put("title", getTitle());
         json.put("authorName", getAuthorName());
 

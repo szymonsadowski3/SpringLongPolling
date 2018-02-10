@@ -13,7 +13,7 @@ public class NewNotificationResolver implements Resolver {
     private boolean isNewNotification = false;
 
     public void update() {
-        isNewNotification = true;
+        this.isNewNotification = true;
     }
 
 
@@ -22,9 +22,9 @@ public class NewNotificationResolver implements Resolver {
         if (!isNewNotification) {
             return Optional.empty();
         } else {
-            isNewNotification = false;
             try {
                 Notification newNotification = notificationService.getNewestNotification();
+                isNewNotification = false;
                 return Optional.of(newNotification.toJSONObject());
             } catch (Exception e) {
                 e.printStackTrace();

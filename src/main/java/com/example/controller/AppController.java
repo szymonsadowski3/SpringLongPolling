@@ -80,7 +80,7 @@ public class AppController {
         return response;
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/notification", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void insertNotification(@RequestBody Notification notification) {
         try {
             notificationService.insertNotification(notification);
@@ -109,7 +109,7 @@ public class AppController {
         return jsonObj;
     }
 
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(fixedRate = 500)
     public void processQueues() {
         supervisor.processQueues();
     }

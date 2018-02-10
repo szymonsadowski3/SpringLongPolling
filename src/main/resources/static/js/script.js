@@ -188,25 +188,45 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'user', function ($scope, $h
             }
         );
 
-    $http.get(newNotificationsLongPollUrl, {timeout: 600000}) // IMPORTANT: Timeout value
-        .then(
-            function (response) {
-                // success callback
-                var newData = response.data;
-                updateNotificationFields(newData);
-                console.dir(newData);
-                newData.isNew = true;
-                notificationList.notifications.unshift(newData);
-                // $("#notificationsWrapper").prepend("<h1>New notification!</h1>");
-            },
-            function (response) {
-                // failure call back
-                // alert('XD');
-            }
-        );
+    function pollNotification() {
+        $http.get(newNotificationsLongPollUrl, {timeout: 600000}) // IMPORTANT: Timeout value
+            .then(
+                function (response) {
+                    // success callback
+                    var newData = response.data;
+                    updateNotificationFields(newData);
+                    console.dir(newData);
+                    newData.isNew = true;
+                    notificationList.notifications.unshift(newData);
+                    pollNotification();
+                },
+                function (response) {
+                    // failure call back
+                    pollNotification();
+                }
+            );
+    }
+
+    pollNotification();
 
 
-    notificationList.addTodo = function () {
+    notificationList.addNotification = function () {
+        $http.post(newNotificationsLongPollUrl, {timeout: 600000}) // IMPORTANT: Timeout value
+            .then(
+                function (response) {
+                    // success callback
+                    var newData = response.data;
+                    updateNotificationFields(newData);
+                    console.dir(newData);
+                    newData.isNew = true;
+                    notificationList.notifications.unshift(newData);
+                    // $("#notificationsWrapper").prepend("<h1>New notification!</h1>");
+                },
+                function (response) {
+                    // failure call back
+                    // alert('XD');
+                }
+            );
         notificationList.notifications.push({text: notificationList.todoText, done: false});
         notificationList.todoText = '';
     };

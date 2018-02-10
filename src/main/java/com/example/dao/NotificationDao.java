@@ -11,17 +11,16 @@ import java.util.List;
 public class NotificationDao {
     private Sql2o sql2o = new Sql2o("jdbc:mysql://mysql.agh.edu.pl:3306/sadowski", "sadowski", "xPjFWAM00pYfJAP6");
 
-    public void insertNotification(String content, int groupId, int importance, int authorId, String title) {
+    public void insertNotification(String content, int importance, String authorName, String title) {
 //        String insertSql = "INSERT into notification VALUES(null, :content, :groupId, :importance, :authorId, :title, null)";
-        String insertSql = "INSERT into notification(content, groupId, importance, authorId, title) " +
-                "VALUES(:content, :groupId, :importance, :authorId, :title)";
+        String insertSql = "INSERT into notification(content, importance, authorName, title) " +
+                "VALUES(:content, :importance, :authorName, :title)";
 
         try (Connection con = sql2o.open()) {
             con.createQuery(insertSql)
                     .addParameter("content", content)
-                    .addParameter("groupId", groupId)
                     .addParameter("importance", importance)
-                    .addParameter("authorId", authorId)
+                    .addParameter("authorName", authorName)
                     .addParameter("title", title)
                     .executeUpdate();
         }
@@ -30,7 +29,7 @@ public class NotificationDao {
 
     public Notification getNewestNotification() {
         try (Connection con = sql2o.open()) {
-            final String query = "SELECT notificationId, content, groupId, importance, authorId, createdOn, title, username as authorName FROM notification JOIN app_user ON (notification.authorId = app_user.userId) ORDER BY createdOn DESC LIMIT 1";
+            final String query = "SELECT notificationId, content, importance, authorName, createdOn, title FROM notification ORDER BY createdOn DESC LIMIT 1";
 
             return con.createQuery(query)
                     .executeAndFetch(Notification.class).get(0);
@@ -48,7 +47,7 @@ public class NotificationDao {
 
     public List<Notification> getNotificationsWithAuthorNames() {
         try (Connection con = sql2o.open()) {
-            final String query = "SELECT notificationId, content, groupId, importance, authorId, createdOn, title, username as authorName FROM notification JOIN app_user ON (notification.authorId = app_user.userId) ORDER BY createdOn DESC";
+            final String query = "SELECT notificationId, content, importance, createdOn, title, authorName FROM notification ORDER BY createdOn DESC";
 
             return con.createQuery(query)
                     .executeAndFetch(Notification.class);

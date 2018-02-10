@@ -36,6 +36,27 @@
 
 <h1 class="text-center mt-4">Notifications App</h1>
 <div ng-controller="dashboardCtrl as notificationList">
+    <form class="form form-horizontal container" ng-submit="notificationList.addNotification()">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title of notification">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Content</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your content goes here..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Importance level</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
+
+        <input class="btn-primary" type="submit" value="add">
+    </form>
+
     <form ng-submit="notificationList.addTodo()">
         <input type="text" ng-model="notificationList.todoText"  size="30"
                placeholder="add new todo here">

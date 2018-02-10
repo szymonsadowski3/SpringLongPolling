@@ -32,7 +32,7 @@
 
 .card {
   /*float: left;*/
-  margin: 0 auto;
+  margin: 60px auto 60px auto;
   padding: 0 1.7rem;
   width: 50%;
 }
@@ -104,13 +104,25 @@
 .card input[type='checkbox'] {
   display: none;
 }
-.card input[type='checkbox']:checked + .menu-content {
-  -webkit-transform: translateY(-60px);
-          transform: translateY(-60px);
+/*.card input[type='checkbox']:checked + .menu-content {*/
+  /*-webkit-transform: translateY(-60px);*/
+          /*transform: translateY(-60px);*/
+/*}*/
+
+.greenBg {
+  background: url("/img/green.png") center/cover no-repeat;
+}
+
+.yellowBg {
+  background: url("/img/yellow.jpg") center/cover no-repeat;
+}
+
+.redBg {
+  background: url("/img/red.png") center/cover no-repeat;
 }
 
 .example-1 .wrapper {
-  background: url(https://hd.unsplash.com/photo-1463415268136-e52a5af54519) center/cover no-repeat;
+  /*background: url(https://hd.unsplash.com/photo-1463415268136-e52a5af54519) center/cover no-repeat;*/
 }
 .example-1 .date {
   position: absolute;
@@ -134,6 +146,9 @@
 }
 .example-1 .date .month,
 .example-1 .date .year {
+  font-size: 16px;
+}
+.example-1 .date .time {
   font-size: 12px;
 }
 .example-1 .content {

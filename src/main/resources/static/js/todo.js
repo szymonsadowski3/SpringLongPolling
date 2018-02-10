@@ -15,6 +15,12 @@ var monthMapping = {
     "12": "December"
 };
 
+var backgroundClassMapping = {
+    1: "greenBg",
+    2: "yellowBg",
+    3: "redBg"
+};
+
 angular.module('todoApp', [])
     .controller('NotificationListController', ['$scope','$http', function ($scope, $http) {
         var notificationList = this;
@@ -28,11 +34,15 @@ angular.module('todoApp', [])
 
                     notificationList.notifications = response.data;
                     notificationList.notifications.forEach(function(obj) {
-                        var dateString = obj.createdOn.split(' ')[0];
+                        var createdOnSplitted = obj.createdOn.split(' ');
+                        var dateString = createdOnSplitted[0];
+                        var timeString = createdOnSplitted[1];
                         var dateSplitted = dateString.split('-');
                         obj.day = dateSplitted[0];
                         obj.month = monthMapping[dateSplitted[1]];
                         obj.year = dateSplitted[2];
+                        obj.timeValue = timeString;
+                        obj.backgroundClass = backgroundClassMapping[obj.importance];
                     });
                     console.dir(notificationList.notifications);
                     $("#spinner").hide();

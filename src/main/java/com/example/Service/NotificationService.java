@@ -30,7 +30,7 @@ public class NotificationService {
 
     public void insertNotification(Notification notification) {
         notificationDao.insertNotification(notification.getContent(), notification.getGroupId(),
-                notification.getImportance(), notification.getAuthorId());
+                notification.getImportance(), notification.getAuthorId(), notification.getTitle());
 
         if(subscriber != null) {
             subscriber.update();

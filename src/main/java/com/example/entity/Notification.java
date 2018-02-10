@@ -13,8 +13,17 @@ public class Notification {
     private String title;
     private String authorName;
 
-//    public Notification() {
-//    }
+    public Notification() {
+    }
+
+    public Notification(String content, int groupId, int importance, int authorId, String title) {
+        this.content = content;
+        this.groupId = groupId;
+        this.importance = importance;
+        this.authorId = authorId;
+        this.authorName = authorName;
+        this.title = title;
+    }
 
     public Notification(int notificationId, Timestamp createdOn, String content,
                         int groupId, int importance, int authorId, String authorName, String title) {

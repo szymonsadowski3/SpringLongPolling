@@ -1,4 +1,5 @@
 var notificationsUrl = '/api/notifications';
+var newNotificationsLongPollUrl = '/api/newNotification';
 
 var monthMapping = {
     "01": "January",
@@ -19,6 +20,22 @@ var backgroundClassMapping = {
     1: "greenBg",
     2: "yellowBg",
     3: "redBg"
+};
+
+var Poller = function($http, $timeout,$q) {
+    var poll = function(http, tick){
+        return http.then(function(r){
+            var deferred = $q.defer();
+            $timeout(function(){
+                deferred.resolve(r);
+            }, tick);
+            return deferred.promise;
+        });
+    };
+
+    return{
+        poll: poll
+    };
 };
 
 angular.module('todoApp', [])
@@ -50,6 +67,18 @@ angular.module('todoApp', [])
                 function(response) {
                     // failure call back
                     notificationList.notifications = [];
+                }
+            );
+
+        $http.get(newNotificationsLongPollUrl, {timeout: 600000}) // IMPORTANT: Timeout value
+            .then(
+                function(response) {
+                    // success callback
+                    $("#notificationsWrapper").prepend("<h1>New notification!</h1>");
+                },
+                function(response) {
+                    // failure call back
+                    alert('XD');
                 }
             );
 

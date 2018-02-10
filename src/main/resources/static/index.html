@@ -18,7 +18,7 @@
     <!--[ <a href="" ng-click="notificationList.archive()">archive</a> ]-->
     <div class="container">
         <img id="spinner" ng-src="img/spinner.gif" style="display:none;">
-        <div ng-repeat="notification in notificationList.notifications">
+        <div ng-repeat="notification in notificationList.notifications" id="notificationsWrapper">
             <div class="example-1 card">
                 <div class="wrapper {{notification.backgroundClass}}">
                     <div class="date">

@@ -11,8 +11,10 @@ import java.util.List;
 public class NotificationDao {
     private Sql2o sql2o = new Sql2o("jdbc:mysql://mysql.agh.edu.pl:3306/sadowski", "sadowski", "xPjFWAM00pYfJAP6");
 
-    public void insertNotification(String content, int groupId, int importance, int authorId) {
-        String insertSql = "INSERT into notification VALUES(null, :content, :groupId, :importance, :authorId, null)";
+    public void insertNotification(String content, int groupId, int importance, int authorId, String title) {
+//        String insertSql = "INSERT into notification VALUES(null, :content, :groupId, :importance, :authorId, :title, null)";
+        String insertSql = "INSERT into notification(content, groupId, importance, authorId, title) " +
+                "VALUES(:content, :groupId, :importance, :authorId, :title)";
 
         try (Connection con = sql2o.open()) {
             con.createQuery(insertSql)
@@ -20,6 +22,7 @@ public class NotificationDao {
                     .addParameter("groupId", groupId)
                     .addParameter("importance", importance)
                     .addParameter("authorId", authorId)
+                    .addParameter("title", title)
                     .executeUpdate();
         }
     }

@@ -116,10 +116,6 @@ app.service('user', function () {
     };
 });
 
-app.controller('dashboardCtrl', function ($scope, user) {
-    $scope.user = user.getName();
-});
-
 app.controller('registerCtrl', ["$scope", "$http", "$location", "user", function ($scope, $http, $location, user) {
     $scope.register = function () {
         var username = $scope.reg_username;
@@ -146,6 +142,8 @@ app.controller('registerCtrl', ["$scope", "$http", "$location", "user", function
 }]);
 
 app.controller('dashboardCtrl', ['$scope', '$http', 'user', function ($scope, $http, user) {
+    $scope.user = user.getName();
+
     var notificationList = this;
 
     $("#spinner").show();

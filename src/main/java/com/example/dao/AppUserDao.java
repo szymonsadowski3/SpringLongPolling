@@ -39,11 +39,15 @@ public class AppUserDao {
         try (Connection con = sql2o.open()) {
             final String query = "SELECT * FROM app_user WHERE username = :username";
 
-            AppUser fetchedUser = con.createQuery(query)
+            List<AppUser> fetchedUsers = con.createQuery(query)
                     .addParameter("username", username)
-                    .executeAndFetch(AppUser.class).get(0);
+                    .executeAndFetch(AppUser.class);
 
-            return BCrypt.checkpw(password, fetchedUser.getHashed());
+            if (fetchedUsers.size() > 0) {
+                return BCrypt.checkpw(password, fetchedUsers.get(0).getHashed());
+            } else {
+                return false;
+            }
         }
     }
 

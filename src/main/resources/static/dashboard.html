@@ -34,12 +34,17 @@
     </div>
 </nav>
 
-<h1 class="text-center">Notifications App</h1>
+<h1 class="text-center mt-4">Notifications App</h1>
 <div ng-controller="dashboardCtrl as notificationList">
+    <form ng-submit="notificationList.addTodo()">
+        <input type="text" ng-model="notificationList.todoText"  size="30"
+               placeholder="add new todo here">
+        <input class="btn-primary" type="submit" value="add">
+    </form>
     <!--<span>{{notificationList.remaining()}} of {{notificationList.notifications.length}} remaining</span>-->
     <!--[ <a href="" ng-click="notificationList.archive()">archive</a> ]-->
     <div class="container">
-        <img id="spinner" ng-src="img/spinner.gif" style="display:none;">
+        <center><img id="spinner" ng-src="img/spinner.gif" style="display:none; margin: 0 auto"></center>
         <div ng-repeat="notification in notificationList.notifications" id="notificationsWrapper">
             <div class="example-1 card">
                 <div class="wrapper {{notification.backgroundClass}}" ng-class="(notification.isNew) ? 'animated shake' : ''">
@@ -65,9 +70,4 @@
             </div>
         </div>
     </div>
-    <form ng-submit="notificationList.addTodo()">
-        <input type="text" ng-model="notificationList.todoText"  size="30"
-               placeholder="add new todo here">
-        <input class="btn-primary" type="submit" value="add">
-    </form>
 </div>

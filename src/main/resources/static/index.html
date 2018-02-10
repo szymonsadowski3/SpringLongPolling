@@ -1,15 +1,13 @@
 <!doctype html>
 <html ng-app="todoApp">
 <head>
-    <script
-            src="http://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/angular.min.js"></script>
     <script src="/js/todo.js"></script>
     <link rel="stylesheet" href="/css/todo.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/cards.css">
+    <link rel="stylesheet" href="/css/animate.css">
 </head>
 <body>
 <h2>Notifications App</h2>
@@ -20,7 +18,10 @@
         <img id="spinner" ng-src="img/spinner.gif" style="display:none;">
         <div ng-repeat="notification in notificationList.notifications" id="notificationsWrapper">
             <div class="example-1 card">
-                <div class="wrapper {{notification.backgroundClass}}">
+                <div class="wrapper {{notification.backgroundClass}}" ng-class="(notification.isNew) ? 'animated shake' : ''">
+                    <div ng-if="notification.isNew">
+                        <div class="newNotificationIndicator">!</div>
+                    </div>
                     <div class="date">
                         <span class="day">{{notification.day}}</span>
                         <span class="month">{{notification.year}}</span>

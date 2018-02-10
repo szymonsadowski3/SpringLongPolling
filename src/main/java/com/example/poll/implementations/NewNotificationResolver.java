@@ -1,13 +1,14 @@
 package com.example.poll.implementations;
 
 import com.example.Service.NotificationService;
+import com.example.entity.Notification;
 import com.example.poll.core.Resolver;
 import org.json.simple.JSONObject;
 
 import java.util.Optional;
 
 public class NewNotificationResolver implements Resolver {
-    NotificationService notificationService = new NotificationService();
+    private NotificationService notificationService = new NotificationService();
 
     private boolean isNewNotification = false;
 
@@ -23,10 +24,8 @@ public class NewNotificationResolver implements Resolver {
         } else {
             isNewNotification = false;
             try {
-                String newNotification = notificationService.getNewestNotification();
-                JSONObject json = new JSONObject();
-                json.put("content", newNotification);
-                return Optional.of(json);
+                Notification newNotification = notificationService.getNewestNotification();
+                return Optional.of(newNotification.toJSONObject());
             } catch (Exception e) {
                 e.printStackTrace();
                 return Optional.empty();

@@ -30,7 +30,7 @@ public class NotificationDao {
 
     public Notification getNewestNotification() {
         try (Connection con = sql2o.open()) {
-            final String query = "SELECT * FROM notification ORDER BY createdOn DESC LIMIT 1";
+            final String query = "SELECT notificationId, content, groupId, importance, authorId, createdOn, title, username as authorName FROM notification JOIN app_user ON (notification.authorId = app_user.userId) ORDER BY createdOn DESC LIMIT 1";
 
             return con.createQuery(query)
                     .executeAndFetch(Notification.class).get(0);
@@ -48,7 +48,7 @@ public class NotificationDao {
 
     public List<Notification> getNotificationsWithAuthorNames() {
         try (Connection con = sql2o.open()) {
-            final String query = "SELECT notificationId, content, groupId, importance, authorId, createdOn, title, username as authorName FROM notification JOIN app_user ON (notification.authorId = app_user.userId)";
+            final String query = "SELECT notificationId, content, groupId, importance, authorId, createdOn, title, username as authorName FROM notification JOIN app_user ON (notification.authorId = app_user.userId) ORDER BY createdOn DESC";
 
             return con.createQuery(query)
                     .executeAndFetch(Notification.class);

@@ -24,8 +24,8 @@ public class NotificationService {
         this.subscriber = subscriber;
     }
 
-    public String getNewestNotification() {
-        return notificationDao.getNewestNotification().toString();
+    public Notification getNewestNotification() {
+        return notificationDao.getNewestNotification();
     }
 
     public void insertNotification(Notification notification) {

@@ -294,3 +294,13 @@
           transform: translate(5px, -50%);
   opacity: 1;
 }
+
+.newNotificationIndicator {
+  position: absolute;
+  right: 0;
+  background: #F44336;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px;
+}

@@ -1,5 +1,7 @@
 package com.example.entity;
 
+import org.json.simple.JSONObject;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
@@ -47,7 +49,6 @@ public class Notification {
 
     public String getCreatedOn() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-//        return createdOn;
         return dateFormat.format(createdOn);
     }
 
@@ -103,5 +104,17 @@ public class Notification {
         this.title = title;
     }
 
+    public JSONObject toJSONObject() {
+        JSONObject json = new JSONObject();
+        json.put("notificationId", getNotificationId());
+        json.put("createdOn", getCreatedOn());
+        json.put("content", getContent());
+        json.put("groupId", getGroupId());
+        json.put("importance", getImportance());
+        json.put("authorId", getAuthorId());
+        json.put("title", getTitle());
+        json.put("authorName", getAuthorName());
 
+        return json;
+    }
 }

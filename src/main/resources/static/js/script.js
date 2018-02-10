@@ -24,6 +24,15 @@ var backgroundClassMapping = {
     3: "redBg"
 };
 
+function format(str, args) {
+    var formatted = str;
+    for (var i = 0; i < args.length; i++) {
+        var regexp = new RegExp('\\{'+i+'\\}', 'gi');
+        formatted = formatted.replace(regexp, args[i]);
+    }
+    return formatted;
+};
+
 app.config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: '/login.html',
@@ -55,14 +64,32 @@ app.config(function ($routeProvider) {
         })
 });
 
-// app.controller('homeCtrl', function ($scope, $location) {
-//     $scope.goToLogin = function () {
-//         $location.path('/login');
-//     };
-//     $scope.register = function () {
-//         $location.path('/register');
-//     }
-// });
+function renderCard(notification) {
+    var animationClass = (notification.isNew) ? 'animated shake' : '';
+
+    return format('<div class="example-1 card">' +
+        '        <div class="wrapper {0} {1}">' +
+        '        <div ng-if="notification.isNew">' +
+        '        <div class="newNotificationIndicator">!</div>' +
+        '        </div>' +
+        '        <div class="date">\n' +
+        '        <span class="day">{2}</span>' +
+        '    <span class="month">{3}</span>' +
+        '    <span class="year">{4}</span>' +
+        '    <span class="time">{5}</span>' +
+        '    </div>' +
+        '    <div class="data">' +
+        '        <div class="content">' +
+        '        <span class="author">{6}</span>' +
+        '    <h1 class="title"><a href="#">{7}</a></h1>' +
+        '    <p class="text">{8}</p>' +
+        '    <label for="show-menu" class="menu-button"><span></span></label>' +
+        '    </div>' +
+        '    <input type="checkbox" id="show-menu" />' +
+        '        </div>' +
+        '        </div>' +
+        '        </div>', [notification.backgroundClass, animationClass, notification.day, notification.year, notification.month, notification.timeValue, notification.authorName, notification.title, notification.content]);
+}
 
 app.controller('loginCtrl', ["$scope", "$http", "$location", "user", function ($scope, $http, $location, user) {
     $scope.goToRegister = function () {
@@ -145,7 +172,7 @@ app.controller('registerCtrl', ["$scope", "$http", "$location", "user", function
     }
 }]);
 
-app.controller('dashboardCtrl', ['$scope', '$http', 'user', function ($scope, $http, user) {
+app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', function ($scope, $http, $interval, user) {
     $scope.user = user.getName();
 
     var notificationList = this;
@@ -192,23 +219,36 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'user', function ($scope, $h
         $http.get(newNotificationsLongPollUrl, {timeout: 600000}) // IMPORTANT: Timeout value
             .then(
                 function (response) {
+                    alert('xDDD');
                     // success callback
                     var newData = response.data;
                     updateNotificationFields(newData);
                     console.dir(newData);
                     newData.isNew = true;
                     notificationList.notifications.unshift(newData);
-                    pollNotification();
+                    notificationList.notifications.push({});
+                    notificationList.notifications.pop();
+                    $scope.$applyAsync();
+                    // pollNotification();
                 },
                 function (response) {
                     // failure call back
-                    pollNotification();
+                    // pollNotification();
                 }
             );
     }
 
-    pollNotification();
+    function pollNewNotification() {
+        $.get(newNotificationsLongPollUrl, function (response) {
+            // success callback
+            updateNotificationFields(response);
+            response.isNew = true;
+            $('#notificationsWrapper').prepend(renderCard(response));
+            pollNewNotification();
+        });
+    }
 
+    pollNewNotification();
 
     notificationList.addNotification = function () {
         $http.post(newNotificationsLongPollUrl, {timeout: 600000}) // IMPORTANT: Timeout value
@@ -246,4 +286,10 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'user', function ($scope, $h
             if (!todo.done) notificationList.notifications.push(todo);
         });
     };
+
+    notificationList.testValue = 0;
+
+    $interval(function() {
+        notificationList.testValue++;
+    }, 100);
 }]);

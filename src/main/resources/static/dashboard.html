@@ -39,15 +39,15 @@
     <form class="form form-horizontal container" ng-submit="notificationList.addNotification()">
         <div class="form-group">
             <label for="exampleFormControlInput1">Title</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title of notification">
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title of notification" ng-model="notificationList.newNotification.title">
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Content</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your content goes here..."></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your content goes here..." ng-model="notificationList.newNotification.content"></textarea>
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Importance level</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select class="form-control" id="exampleFormControlSelect1" ng-model="notificationList.newNotification.importance">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>

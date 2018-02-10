@@ -1,6 +1,7 @@
 var app = angular.module('main', ['ngRoute']);
 
 var notificationsUrl = '/api/notifications';
+var postNotificationUrl = '/api/notification';
 var newNotificationsLongPollUrl = '/api/newNotification';
 
 var monthMapping = {
@@ -251,20 +252,18 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
     pollNewNotification();
 
     notificationList.addNotification = function () {
-        $http.post(newNotificationsLongPollUrl, {timeout: 600000}) // IMPORTANT: Timeout value
+        $http.post(postNotificationUrl, JSON.stringify({
+            title: notificationList.newNotification.title,
+            content: notificationList.newNotification.content,
+            importance: notificationList.newNotification.importance,
+            authorName: user.getName(),
+        })) // IMPORTANT: Timeout value
             .then(
                 function (response) {
                     // success callback
-                    var newData = response.data;
-                    updateNotificationFields(newData);
-                    console.dir(newData);
-                    newData.isNew = true;
-                    notificationList.notifications.unshift(newData);
-                    // $("#notificationsWrapper").prepend("<h1>New notification!</h1>");
                 },
                 function (response) {
                     // failure call back
-                    // alert('XD');
                 }
             );
         notificationList.notifications.push({text: notificationList.todoText, done: false});

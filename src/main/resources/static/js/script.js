@@ -1,0 +1,82 @@
+var app = angular.module('main', ['ngRoute']);
+
+app.config(function($routeProvider) {
+    $routeProvider.when('/', {
+        templateUrl: '/home.html',
+        controller: 'homeCtrl'
+    }).when('/login', {
+        templateUrl: '/login.html',
+        controller: 'loginCtrl'
+    }).when('/dashboard', {
+        templateUrl: '/dashboard.html',
+        controller: 'dashboardCtrl'
+    })
+        .otherwise({
+        template: '404'
+    })
+});
+
+app.controller('homeCtrl', function($scope, $location) {
+    $scope.goToLogin = function() {
+        $location.path('/login');
+    };
+    $scope.register = function() {
+        $location.path('/register');
+    }
+});
+
+app.controller('loginCtrl', ["$scope", "$http", "$location", "user", function($scope, $http, $location, user) {
+    $scope.login = function() {
+        var username = $scope.username;
+        var password = $scope.password;
+        $http({
+            url: 'http://localhost:8080/api/login',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: 'username='+username+'&password='+password
+        }).then(function(response) {
+            console.dir(response);
+            if(response.data.authorized) {
+                user.userLoggedIn();
+                user.setName(response.data.user);
+                $location.path('/dashboard');
+            } else {
+                alert('invalid login');
+            }
+        })
+    }
+}]);
+
+app.service('user', function() {
+    var username;
+    var loggedin = false;
+    var id;
+
+    this.setName = function(name) {
+        username = name;
+    };
+    this.getName = function() {
+        return username;
+    };
+
+    // this.setID = function(userID) {
+    //     id = userID;
+    // };
+    // this.getID = function() {
+    //     return id;
+    // };
+
+    this.isUserLoggedIn = function() {
+        return loggedin;
+    };
+    this.userLoggedIn = function() {
+        loggedin = true;
+    };
+});
+
+app.controller('dashboardCtrl', function($scope, user) {
+    $scope.user = user.getName();
+
+});

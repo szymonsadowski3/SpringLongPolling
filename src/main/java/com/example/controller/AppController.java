@@ -8,9 +8,11 @@ import com.example.entity.Notification;
 import com.example.poll.core.DeferredJSON;
 import com.example.poll.core.Supervisor;
 import com.example.poll.implementations.NewNotificationResolver;
+import org.json.simple.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +52,14 @@ public class AppController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping(value="/login",method=RequestMethod.POST)
+    public JSONObject createRole(@RequestBody MultiValueMap<String,String> formData){
+        JSONObject jsonObj = new JSONObject();
+        jsonObj.put("authorized", true);
+        jsonObj.put("user", "admin");
+        return jsonObj;
     }
 
     @Scheduled(fixedRate = 2000)

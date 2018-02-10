@@ -1,58 +1,15 @@
-<!doctype html>
-<html ng-app="todoApp">
+<!DOCTYPE html>
+<html lang="en" ng-app="main">
 <head>
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/angular.min.js"></script>
-    <script src="/js/todo.js"></script>
-    <link rel="stylesheet" href="/css/todo.css">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/cards.css">
-    <link rel="stylesheet" href="/css/animate.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
 </head>
 <body>
-<h2>Notifications App</h2>
-<div ng-controller="NotificationListController as notificationList">
-    <!--<span>{{notificationList.remaining()}} of {{notificationList.notifications.length}} remaining</span>-->
-    <!--[ <a href="" ng-click="notificationList.archive()">archive</a> ]-->
-    <div class="container">
-        <img id="spinner" ng-src="img/spinner.gif" style="display:none;">
-        <div ng-repeat="notification in notificationList.notifications" id="notificationsWrapper">
-            <div class="example-1 card">
-                <div class="wrapper {{notification.backgroundClass}}" ng-class="(notification.isNew) ? 'animated shake' : ''">
-                    <div ng-if="notification.isNew">
-                        <div class="newNotificationIndicator">!</div>
-                    </div>
-                    <div class="date">
-                        <span class="day">{{notification.day}}</span>
-                        <span class="month">{{notification.year}}</span>
-                        <span class="year">{{notification.month}}</span>
-                        <span class="time">{{notification.timeValue}}</span>
-                    </div>
-                    <div class="data">
-                        <div class="content">
-                            <span class="author">{{notification.authorName}}</span>
-                            <h1 class="title"><a href="#">{{notification.title}}</a></h1>
-                            <p class="text">{{notification.content}}</p>
-                            <label for="show-menu" class="menu-button"><span></span></label>
-                        </div>
-                        <input type="checkbox" id="show-menu" />
-                        <!--<ul class="menu-content">-->
-                            <!--<li>-->
-                                <!--<a href="#" class="fa fa-bookmark-o"></a>-->
-                            <!--</li>-->
-                            <!--<li><a href="#" class="fa fa-heart-o"><span>47</span></a></li>-->
-                            <!--<li><a href="#" class="fa fa-comment-o"><span>8</span></a></li>-->
-                        <!--</ul>-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <form ng-submit="notificationList.addTodo()">
-        <input type="text" ng-model="notificationList.todoText"  size="30"
-               placeholder="add new todo here">
-        <input class="btn-primary" type="submit" value="add">
-    </form>
-</div>
+    <div ng-view id="mainContent"></div>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-route.min.js"></script>
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>-->
+    <script src="/js/angular-resource.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

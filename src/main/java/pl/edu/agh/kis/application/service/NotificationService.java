@@ -1,8 +1,8 @@
-package com.example.Service;
+package pl.edu.agh.kis.application.service;
 
-import com.example.dao.NotificationDao;
-import com.example.entity.Notification;
-import com.example.poll.implementations.NewNotificationResolver;
+import pl.edu.agh.kis.application.dao.NotificationDao;
+import pl.edu.agh.kis.application.entity.Notification;
+import pl.edu.agh.kis.poll.implementations.NewNotificationResolver;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

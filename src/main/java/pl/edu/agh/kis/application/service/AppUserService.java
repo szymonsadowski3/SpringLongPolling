@@ -1,9 +1,8 @@
-package com.example.Service;
+package pl.edu.agh.kis.application.service;
 
-import com.example.dao.AppUserDao;
-import com.example.entity.AppUser;
-import com.example.entity.Group;
-import com.example.external.BCrypt;
+import pl.edu.agh.kis.application.dao.AppUserDao;
+import pl.edu.agh.kis.application.entity.AppUser;
+import pl.edu.agh.kis.application.external.BCrypt;
 
 public class AppUserService {
     private AppUserDao appUserDao = new AppUserDao();

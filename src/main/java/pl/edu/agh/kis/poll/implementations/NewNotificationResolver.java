@@ -1,8 +1,8 @@
-package com.example.poll.implementations;
+package pl.edu.agh.kis.poll.implementations;
 
-import com.example.Service.NotificationService;
-import com.example.entity.Notification;
-import com.example.poll.core.Resolver;
+import pl.edu.agh.kis.application.service.NotificationService;
+import pl.edu.agh.kis.application.entity.Notification;
+import pl.edu.agh.kis.poll.core.Resolver;
 import org.json.simple.JSONObject;
 
 import java.util.Optional;
@@ -16,7 +16,7 @@ public class NewNotificationResolver implements Resolver {
         this.isNewNotification = true;
     }
 
-    public void setToFalse() {
+    public void setNotNewNotification() {
         this.isNewNotification = false;
     }
 
@@ -35,7 +35,7 @@ public class NewNotificationResolver implements Resolver {
                         new java.util.TimerTask() {
                             @Override
                             public void run() {
-                                nnr.setToFalse();
+                                nnr.setNotNewNotification();
                             }
                         },
                         500

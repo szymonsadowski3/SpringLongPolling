@@ -1,4 +1,4 @@
-package com.example.poll.core;
+package pl.edu.agh.kis.poll.core;
 
 import org.json.simple.JSONObject;
 import org.springframework.web.context.request.async.DeferredResult;

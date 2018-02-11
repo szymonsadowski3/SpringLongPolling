@@ -1,4 +1,4 @@
-package com.example.entity;
+package pl.edu.agh.kis.application.entity;
 
 import org.json.simple.JSONObject;
 

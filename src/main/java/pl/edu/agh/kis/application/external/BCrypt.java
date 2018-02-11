@@ -1,4 +1,4 @@
-package com.example.external;
+package pl.edu.agh.kis.application.external;
 
 // Copyright (c) 2006 Damien Miller <djm@mindrot.org>
 //

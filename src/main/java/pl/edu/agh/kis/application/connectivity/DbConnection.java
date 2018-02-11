@@ -1,4 +1,4 @@
-package com.example.connectivity;
+package pl.edu.agh.kis.application.connectivity;
 
 import org.sql2o.Sql2o;
 

@@ -1,4 +1,4 @@
-package com.example.auth;
+package pl.edu.agh.kis.application.auth;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -23,7 +23,7 @@ public class Authorizer {
         try {
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer(issuer)
-                    .build(); //Reusable verifier instance
+                    .build();
             DecodedJWT jwt = verifier.verify(token);
             return issuer.equals(jwt.getIssuer());
         } catch (JWTVerificationException exception){

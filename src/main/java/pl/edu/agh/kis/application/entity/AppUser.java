@@ -1,4 +1,4 @@
-package com.example.entity;
+package pl.edu.agh.kis.application.entity;
 
 public class AppUser {
     private int userId;

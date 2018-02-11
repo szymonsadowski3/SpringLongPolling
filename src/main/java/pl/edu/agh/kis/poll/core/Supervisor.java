@@ -1,4 +1,4 @@
-package com.example.poll.core;
+package pl.edu.agh.kis.poll.core;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;

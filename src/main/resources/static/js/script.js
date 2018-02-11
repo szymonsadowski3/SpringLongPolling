@@ -25,6 +25,8 @@ var backgroundClassMapping = {
     3: "redBg"
 };
 
+var currentRequest;
+
 function format(str, args) {
     var formatted = str;
     for (var i = 0; i < args.length; i++) {
@@ -32,7 +34,7 @@ function format(str, args) {
         formatted = formatted.replace(regexp, args[i]);
     }
     return formatted;
-};
+}
 
 app.config(function ($routeProvider) {
     $routeProvider.when('/', {
@@ -198,14 +200,10 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
         .then(
             function (response) {
                 // success callback
-                // var responseData = response.data;
-
                 notificationList.notifications = response.data;
                 notificationList.notifications.forEach(function (obj) {
                     updateNotificationFields(obj);
                 });
-
-                // notificationList.notifications.
 
                 console.dir(notificationList.notifications);
                 $("#spinner").hide();
@@ -234,13 +232,12 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
                 },
                 function (response) {
                     // failure call back
-                    // pollNotification();
                 }
             );
     }
 
     function pollNewNotification() {
-        $.get(newNotificationsLongPollUrl, function (response) {
+        currentRequest = $.get(newNotificationsLongPollUrl, function (response) {
             // success callback
             updateNotificationFields(response);
             response.isNew = true;
@@ -256,39 +253,17 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
             title: notificationList.newNotification.title,
             content: notificationList.newNotification.content,
             importance: notificationList.newNotification.importance,
-            authorName: user.getName(),
+            authorName: user.getName()
         })) // IMPORTANT: Timeout value
             .then(
                 function (response) {
                     // success callback
+                    currentRequest.abort();
                 },
                 function (response) {
                     // failure call back
+                    currentRequest.abort();
                 }
             );
-        notificationList.notifications.push({text: notificationList.todoText, done: false});
-        notificationList.todoText = '';
     };
-
-    notificationList.remaining = function () {
-        var count = 0;
-        angular.forEach(notificationList.notifications, function (todo) {
-            count += todo.done ? 0 : 1;
-        });
-        return count;
-    };
-
-    notificationList.archive = function () {
-        var oldTodos = notificationList.notifications;
-        notificationList.notifications = [];
-        angular.forEach(oldTodos, function (todo) {
-            if (!todo.done) notificationList.notifications.push(todo);
-        });
-    };
-
-    notificationList.testValue = 0;
-
-    $interval(function() {
-        notificationList.testValue++;
-    }, 100);
 }]);

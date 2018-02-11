@@ -12,20 +12,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown04">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
         </ul>
         <a href="#">
             <span class="fa fa-user"></span> 
@@ -54,16 +40,9 @@
             </select>
         </div>
 
-        <input class="btn-primary" type="submit" value="add">
+        <input class="btn-primary" type="submit" value="Submit">
     </form>
 
-    <form ng-submit="notificationList.addTodo()">
-        <input type="text" ng-model="notificationList.todoText"  size="30"
-               placeholder="add new todo here">
-        <input class="btn-primary" type="submit" value="add">
-    </form>
-    <!--<span>{{notificationList.remaining()}} of {{notificationList.notifications.length}} remaining</span>-->
-    <!--[ <a href="" ng-click="notificationList.archive()">archive</a> ]-->
     <div class="container">
         <center><img id="spinner" ng-src="img/spinner.gif" style="display:none; margin: 0 auto"></center>
         <div ng-repeat="notification in notificationList.notifications" id="notificationsWrapper">

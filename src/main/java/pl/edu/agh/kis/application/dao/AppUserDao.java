@@ -1,9 +1,8 @@
-package com.example.dao;
+package pl.edu.agh.kis.application.dao;
 
-import com.example.connectivity.DbConnection;
-import com.example.entity.AppUser;
-import com.example.entity.Group;
-import com.example.external.BCrypt;
+import pl.edu.agh.kis.application.connectivity.DbConnection;
+import pl.edu.agh.kis.application.entity.AppUser;
+import pl.edu.agh.kis.application.external.BCrypt;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 

@@ -1,6 +1,6 @@
-package com.example.dao;
+package pl.edu.agh.kis.application.dao;
 
-import com.example.entity.Notification;
+import pl.edu.agh.kis.application.entity.Notification;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;

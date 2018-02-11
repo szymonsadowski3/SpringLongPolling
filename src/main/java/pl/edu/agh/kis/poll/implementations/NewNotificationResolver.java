@@ -9,20 +9,22 @@ import org.json.simple.JSONObject;
 
 import java.util.Optional;
 
+/**
+ * Resolver that is successfully resolving Promises, when new record has been added to notification table
+ */
 @Component
 public class NewNotificationResolver implements Resolver, Observer {
     private NotificationService notificationService = new NotificationService();
 
     private boolean isNewNotification = false;
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void update() {
         this.isNewNotification = true;
     }
-
-    public void setNotNewNotification() {
-        this.isNewNotification = false;
-    }
-
 
     @Override
     public Optional<JSONObject> resolve() {
@@ -38,7 +40,7 @@ public class NewNotificationResolver implements Resolver, Observer {
                         new java.util.TimerTask() {
                             @Override
                             public void run() {
-                                nnr.setNotNewNotification();
+                                nnr.setIsNewNotification(false);
                             }
                         },
                         500
@@ -50,5 +52,14 @@ public class NewNotificationResolver implements Resolver, Observer {
                 return Optional.empty();
             }
         }
+    }
+
+    /**
+     * Sets new isNewNotification.
+     *
+     * @param isNewNotification New value of isNewNotification.
+     */
+    public void setIsNewNotification(boolean isNewNotification) {
+        this.isNewNotification = isNewNotification;
     }
 }

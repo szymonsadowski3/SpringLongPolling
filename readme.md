@@ -1,3 +1,7 @@
+# Opis
+
+Projekt jest realizacj
+
 # Running:
 
 --spring.config.location=classpath:/application.properties 

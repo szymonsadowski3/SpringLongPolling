@@ -9,6 +9,7 @@ import pl.edu.agh.kis.application.auth.Authorizer;
 import pl.edu.agh.kis.application.entity.AppUser;
 import pl.edu.agh.kis.application.entity.Notification;
 import pl.edu.agh.kis.poll.core.DeferredJSON;
+import pl.edu.agh.kis.poll.core.MainController;
 import pl.edu.agh.kis.poll.core.Supervisor;
 import pl.edu.agh.kis.poll.implementations.NewNotificationResolver;
 import org.json.simple.JSONObject;
@@ -22,10 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class AppController {
-    @Autowired
-    private Supervisor supervisor;
-
+public class AppController extends MainController {
     @Autowired
     private NewNotificationResolver resolver;
 
@@ -109,10 +107,5 @@ public class AppController {
         jsonObj.put("user", username);
 
         return jsonObj;
-    }
-
-    @Scheduled(fixedRate = 500)
-    public void processQueues() {
-        supervisor.processQueues();
     }
 }

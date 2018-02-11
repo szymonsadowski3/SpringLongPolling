@@ -1,5 +1,6 @@
 package pl.edu.agh.kis.application.dao;
 
+import org.springframework.stereotype.Repository;
 import pl.edu.agh.kis.application.connectivity.DbConnection;
 import pl.edu.agh.kis.application.entity.AppUser;
 import pl.edu.agh.kis.application.external.BCrypt;
@@ -8,9 +9,18 @@ import org.sql2o.Sql2o;
 
 import java.util.List;
 
+/**
+ * Data Access Object used to obtain information about AppUser entity
+ */
+@Repository
 public class AppUserDao {
     private Sql2o sql2o = DbConnection.getInstance();
 
+    /**
+     * @param username User's name
+     * @param hashed Password hashed by BCrypt
+     * @return true if operation of creation succeeded, false otherwise
+     */
     public boolean createAppUser(String username, String hashed) {
         try (Connection con = sql2o.open()) {
             final String query =
@@ -34,6 +44,11 @@ public class AppUserDao {
         }
     }
 
+    /**
+     * @param username user's name
+     * @param password password typed in by user
+     * @return result of verification
+     */
     public boolean verifyAppUser(String username, String password) {
         try (Connection con = sql2o.open()) {
             final String query = "SELECT * FROM app_user WHERE username = :username";
@@ -50,6 +65,10 @@ public class AppUserDao {
         }
     }
 
+    /**
+     * @param userId unique identificator of user
+     * @return Instance of AppUser class
+     */
     public AppUser readAppUser(int userId) {
         try (Connection con = sql2o.open()) {
             final String query = "SELECT * FROM app_user WHERE userId = :userId";
@@ -60,6 +79,9 @@ public class AppUserDao {
         }
     }
 
+    /**
+     * @param userId Id of user which is going to be deleted
+     */
     public void deleteUser(int userId) {
         String insertSql = "DELETE from app_user WHERE userId = :userId";
 
@@ -68,9 +90,5 @@ public class AppUserDao {
                     .addParameter("userId", userId)
                     .executeUpdate();
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new NotificationDao().getNewestNotification());
     }
 }

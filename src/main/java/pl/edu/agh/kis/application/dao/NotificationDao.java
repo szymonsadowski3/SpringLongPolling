@@ -7,10 +7,19 @@ import org.sql2o.Sql2o;
 
 import java.util.List;
 
+/**
+ * Data Access Object used to obtain information about Notification entity
+ */
 @Repository
 public class NotificationDao {
     private Sql2o sql2o = new Sql2o("jdbc:mysql://mysql.agh.edu.pl:3306/sadowski", "sadowski", "xPjFWAM00pYfJAP6");
 
+    /**
+     * @param content Content of notification
+     * @param importance Importance level of notification (1 or 2 or 3)
+     * @param authorName Username of the notification's author
+     * @param title Title of notification
+     */
     public void insertNotification(String content, int importance, String authorName, String title) {
         String insertSql = "INSERT into notification(content, importance, authorName, title) " +
                 "VALUES(:content, :importance, :authorName, :title)";
@@ -26,6 +35,9 @@ public class NotificationDao {
     }
 
 
+    /**
+     * @return Newest notification in database
+     */
     public Notification getNewestNotification() {
         try (Connection con = sql2o.open()) {
             final String query = "SELECT notificationId, content, importance, authorName, createdOn, title FROM notification ORDER BY createdOn DESC LIMIT 1";
@@ -35,25 +47,15 @@ public class NotificationDao {
         }
     }
 
+    /**
+     * @return List of all notifications from database
+     */
     public List<Notification> getNotifications() {
-        try (Connection con = sql2o.open()) {
-            final String query = "SELECT * FROM notification";
-
-            return con.createQuery(query)
-                    .executeAndFetch(Notification.class);
-        }
-    }
-
-    public List<Notification> getNotificationsWithAuthorNames() {
         try (Connection con = sql2o.open()) {
             final String query = "SELECT notificationId, content, importance, createdOn, title, authorName FROM notification ORDER BY createdOn DESC";
 
             return con.createQuery(query)
                     .executeAndFetch(Notification.class);
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new NotificationDao().getNewestNotification());
     }
 }

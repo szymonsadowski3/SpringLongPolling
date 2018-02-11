@@ -36,63 +36,9 @@ public class Notification {
         this.title = title;
     }
 
-    public int getNotificationId() {
-        return notificationId;
-    }
-
-    public void setNotificationId(int notificationId) {
-        this.notificationId = notificationId;
-    }
-
-    public String getCreatedOn() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        return dateFormat.format(createdOn);
-    }
-
-    public void setCreatedOn(Timestamp createdOn) {
-        this.createdOn = createdOn;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
-    public int getImportance() {
-        return importance;
-    }
-
-    public void setImportance(int importance) {
-        this.importance = importance;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
+    /**
+     * @return Converts Object to JSONObject - (rewriting the fields to JSONObject)
+     */
     public JSONObject toJSONObject() {
         JSONObject json = new JSONObject();
         json.put("notificationId", getNotificationId());
@@ -104,5 +50,125 @@ public class Notification {
         json.put("authorName", getAuthorName());
 
         return json;
+    }
+
+    /**
+     * @return Human readable format of timestamp, which represents datetime, when notification was created
+     */
+    public String getCreatedOn() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        return dateFormat.format(createdOn);
+    }
+
+    public void setCreatedOn(Timestamp createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    /**
+     * Gets importance.
+     *
+     * @return Value of importance.
+     */
+    public int getImportance() {
+        return importance;
+    }
+
+    /**
+     * Gets authorName.
+     *
+     * @return Value of authorName.
+     */
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    /**
+     * Gets content.
+     *
+     * @return Value of content.
+     */
+    public String getContent() {
+        return content;
+    }
+
+    /**
+     * Gets groupId.
+     *
+     * @return Value of groupId.
+     */
+    public int getGroupId() {
+        return groupId;
+    }
+
+    /**
+     * Sets new importance.
+     *
+     * @param importance New value of importance.
+     */
+    public void setImportance(int importance) {
+        this.importance = importance;
+    }
+
+    /**
+     * Gets title.
+     *
+     * @return Value of title.
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets new notificationId.
+     *
+     * @param notificationId New value of notificationId.
+     */
+    public void setNotificationId(int notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    /**
+     * Sets new groupId.
+     *
+     * @param groupId New value of groupId.
+     */
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    /**
+     * Sets new title.
+     *
+     * @param title New value of title.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * Sets new content.
+     *
+     * @param content New value of content.
+     */
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    /**
+     * Gets notificationId.
+     *
+     * @return Value of notificationId.
+     */
+    public int getNotificationId() {
+        return notificationId;
+    }
+
+    /**
+     * Sets new authorName.
+     *
+     * @param authorName New value of authorName.
+     */
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 }

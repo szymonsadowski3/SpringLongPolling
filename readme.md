@@ -14,3 +14,6 @@
     
 3. Command
     - DeferredJSON
+    
+4. Singleton
+    - DbConnection

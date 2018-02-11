@@ -1,5 +1,6 @@
 package pl.edu.agh.kis.application.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import pl.edu.agh.kis.application.service.AppUserService;
 import pl.edu.agh.kis.application.service.NotificationService;
 import pl.edu.agh.kis.application.auth.Authorizer;
@@ -14,16 +15,28 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class AppController {
-    private Supervisor supervisor = new Supervisor();
-    private NewNotificationResolver resolver = new NewNotificationResolver();
+    @Autowired
+    private Supervisor supervisor;
 
-    private NotificationService notificationService = new NotificationService(resolver);
-    private AppUserService appUserService = new AppUserService();
+    @Autowired
+    private NewNotificationResolver resolver;
+
+    @Autowired
+    private NotificationService notificationService;
+
+    @Autowired
+    private AppUserService appUserService;
+
+    @PostConstruct
+    public void init(){
+        notificationService.addObserver(resolver);
+    }
 
     @RequestMapping(value = "/newNotification", method = RequestMethod.GET)
     public @ResponseBody

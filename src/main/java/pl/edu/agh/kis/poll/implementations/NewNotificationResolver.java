@@ -1,5 +1,7 @@
 package pl.edu.agh.kis.poll.implementations;
 
+import org.springframework.stereotype.Component;
+import pl.edu.agh.kis.application.observer.Observer;
 import pl.edu.agh.kis.application.service.NotificationService;
 import pl.edu.agh.kis.application.entity.Notification;
 import pl.edu.agh.kis.poll.core.Resolver;
@@ -7,7 +9,8 @@ import org.json.simple.JSONObject;
 
 import java.util.Optional;
 
-public class NewNotificationResolver implements Resolver {
+@Component
+public class NewNotificationResolver implements Resolver, Observer {
     private NotificationService notificationService = new NotificationService();
 
     private boolean isNewNotification = false;

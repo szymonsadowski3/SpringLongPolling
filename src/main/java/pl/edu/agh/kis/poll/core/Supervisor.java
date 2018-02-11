@@ -1,8 +1,11 @@
 package pl.edu.agh.kis.poll.core;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+@Component
 public class Supervisor {
     private final Queue<DeferredJSON> responseBodyQueue = new ConcurrentLinkedQueue<>();
 

@@ -1,9 +1,11 @@
 package pl.edu.agh.kis.application.service;
 
+import org.springframework.stereotype.Service;
 import pl.edu.agh.kis.application.dao.AppUserDao;
 import pl.edu.agh.kis.application.entity.AppUser;
 import pl.edu.agh.kis.application.external.BCrypt;
 
+@Service
 public class AppUserService {
     private AppUserDao appUserDao = new AppUserDao();
 

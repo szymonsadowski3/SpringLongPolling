@@ -242,7 +242,7 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
             updateNotificationFields(response);
             response.isNew = true;
             $('#notificationsWrapper').prepend(renderCard(response));
-            pollNewNotification();
+            setTimeout(pollNewNotification, 250);
         });
     }
 
@@ -259,10 +259,12 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
                 function (response) {
                     // success callback
                     currentRequest.abort();
+                    setTimeout(pollNewNotification, 250);
                 },
                 function (response) {
                     // failure call back
                     currentRequest.abort();
+                    setTimeout(pollNewNotification, 250);
                 }
             );
     };

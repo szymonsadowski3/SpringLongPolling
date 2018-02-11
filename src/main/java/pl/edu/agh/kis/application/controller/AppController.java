@@ -1,6 +1,8 @@
 package pl.edu.agh.kis.application.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import pl.edu.agh.kis.application.service.AppUserService;
 import pl.edu.agh.kis.application.service.NotificationService;
 import pl.edu.agh.kis.application.auth.Authorizer;
@@ -79,12 +81,14 @@ public class AppController {
     }
 
     @RequestMapping(value="/notification", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void insertNotification(@RequestBody Notification notification) {
+    public ResponseEntity<Void> insertNotification(@RequestBody Notification notification) {
         try {
             notificationService.insertNotification(notification);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value="/login",method=RequestMethod.POST)

@@ -57,27 +57,56 @@ DeferredJSON deferredResult() {
 }
 ```
 
-# Running:
-
---spring.config.location=classpath:/application.properties 
-
 ## Użyte wzorce projektowe:
 
 1. Data Access Object Pattern
+
+    Poniższe klasy są używane w celu wykonywania operacji na źródle danych (np. bazie danych)
+    
     - AppUserDao
     - NotificationDao
     
 2. Observer Pattern
-    - NotificationService jest typu Observable (gdy pojawia się nowa notyfikacja, powiadamia obserwatorów)
-    - NewNotificationResolver jest typu Observator ("rozwiązuje" zapytanie asynchroniczne po pojawieniu się nowej notyfikacji)
+    - NotificationService jest typu Observable - gdy pojawia się nowa notyfikacja, powiadamia obserwatorów
+    - NewNotificationResolver jest typu Observator - "rozwiązuje" zapytanie asynchroniczne po pojawieniu się nowej notyfikacji (wartości w obiekcie typu Promise)
     
 3. Command
+
+    Poniższa klasa realizuje wzorzec projektowy "Command" gdyż enkapsuluje akcję, która jest potrzebna do "rozwiązania" zapytania asynchronicznego 
+
     - DeferredJSON
     
 4. Singleton
+    
+    Poniższa klasa realizuje wzorzec Singleton, gdyż jest potrzebna jedynie jedna instancja połączenia z bazą danych
+
     - DbConnection
 
 5. Promise
+
+    Poniższa klasa realizuje wzorzec "Promise", gdyż reprezentuje początkowo nieznany wynik jakiegoś działania, który może zostać ustalony w przyszłości
+
+    - DeferredJSON
+
+# Uruchamianie aplikacji:
+
+1. W pierwszym kroku należy zaimportować zależności: 
+
+```
+    mvn clean install -U
+```
+
+2. Następnie należy wykonać poniższe polecenie:
+
+```
+    mvn exec:java -Dexec.mainClass="pl.edu.agh.kis.Main" --spring.config.location=classpath:/application.properties 
+```
+
+gdzie `classpath:/application.properties` oznacza ścieżkę do pliku konfiguracyjnego aplikacji
+
+# Konfiguracja
+
+Konfiguracja aplikacji znajduje się w pliku `src/main/resources/application.properties`
 
 ## Dokumentacja
 

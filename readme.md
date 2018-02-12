@@ -121,4 +121,6 @@ Plik wykonywalny .jar ma nazwę `gs-spring-boot-0.1.0.jar`
 ## Screeny aplikacji
 
 ![main](https://raw.githubusercontent.com/szymonsadowski3/SpringStarter/master/screens/loginPage.png)
+
+
 ![dashboard](https://raw.githubusercontent.com/szymonsadowski3/SpringStarter/master/screens/dashboard.png)

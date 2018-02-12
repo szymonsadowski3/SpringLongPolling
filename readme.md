@@ -117,3 +117,8 @@ Plik wykonywalny .jar ma nazwę `gs-spring-boot-0.1.0.jar`
 1. Javadoc - znajduje się w katalogu javadoc/
              
 2. Swagger - znajduje się w pliku ApiDocumentation.pdf lub pod endpointem `/swagger-ui.html` po uruchomieniu aplikacji
+
+## Screeny aplikacji
+
+![main](https://raw.githubusercontent.com/szymonsadowski3/SpringStarter/master/screens/loginPage.png)
+![dashboard](https://raw.githubusercontent.com/szymonsadowski3/SpringStarter/master/screens/dashboard.png)

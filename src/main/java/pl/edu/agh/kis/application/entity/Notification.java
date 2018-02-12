@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 
 public class Notification {
     private int notificationId;
-    private Timestamp createdOn;
+    private String createdOn;
     private String content;
     private int groupId;
     private int importance;
@@ -21,11 +21,10 @@ public class Notification {
         this.content = content;
         this.groupId = groupId;
         this.importance = importance;
-        this.authorName = authorName;
         this.title = title;
     }
 
-    public Notification(int notificationId, Timestamp createdOn, String content,
+    public Notification(int notificationId, String createdOn, String content,
                         int groupId, int importance, String authorName, String title) {
         this.notificationId = notificationId;
         this.createdOn = createdOn;
@@ -56,12 +55,9 @@ public class Notification {
      * @return Human readable format of timestamp, which represents datetime, when notification was created
      */
     public String getCreatedOn() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        return dateFormat.format(createdOn);
-    }
-
-    public void setCreatedOn(Timestamp createdOn) {
-        this.createdOn = createdOn;
+        return createdOn;
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+//        return dateFormat.format(createdOn);
     }
 
     /**

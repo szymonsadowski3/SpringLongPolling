@@ -1,5 +1,6 @@
 package pl.edu.agh.kis.application.dao;
 
+import pl.edu.agh.kis.application.connectivity.DbConnection;
 import pl.edu.agh.kis.application.entity.Notification;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
@@ -12,7 +13,7 @@ import java.util.List;
  */
 @Repository
 public class NotificationDao {
-    private Sql2o sql2o = new Sql2o("jdbc:mysql://mysql.agh.edu.pl:3306/sadowski", "sadowski", "xPjFWAM00pYfJAP6");
+    private Sql2o sql2o = DbConnection.getInstance();
 
     /**
      * @param content Content of notification

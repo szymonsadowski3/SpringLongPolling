@@ -12,7 +12,7 @@ CREATE TABLE app_user
 CREATE TABLE notification
 (
   notificationId INT AUTO_INCREMENT
-    PRIMARY KEY,
+PRIMARY KEY,
   content        TEXT                                NULL,
   importance     INT                                 NULL,
   authorName     VARCHAR(255)                        NOT NULL,

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>pl.edu.agh.kis.poll.implementations.NewNotificationResolver</OriginalElement>
+  <nodes>
+    <node x="1790.0" y="638.0">pl.edu.agh.kis.application.auth.Authorizer</node>
+    <node x="1536.3098039215686" y="188.0">pl.edu.agh.kis.application.observer.Observable</node>
+    <node x="183.0" y="638.0">org.springframework.web.context.request.async.DeferredResult</node>
+    <node x="0.0" y="199.0">pl.edu.agh.kis.poll.core.Supervisor</node>
+    <node x="203.0" y="133.0">org.springframework.web.bind.annotation.RequestMapping</node>
+    <node x="1575.0" y="638.0">pl.edu.agh.kis.application.connectivity.DbConnection</node>
+    <node x="0.0" y="781.5">pl.edu.agh.kis.application.command.Command</node>
+    <node x="575.0" y="638.0">pl.edu.agh.kis.application.entity.Notification</node>
+    <node x="120.5" y="1026.0">pl.edu.agh.kis.poll.core.DeferredJSON</node>
+    <node x="891.3779411764706" y="210.0">pl.edu.agh.kis.poll.core.MainController</node>
+    <node x="1901.0598039215686" y="210.0">org.springframework.stereotype.Service</node>
+    <node x="596.0" y="111.0">io.swagger.annotations.Api</node>
+    <node x="1159.2948529411765" y="210.0">org.springframework.stereotype.Repository</node>
+    <node x="1317.0" y="638.0">pl.edu.agh.kis.application.entity.AppUser</node>
+    <node x="1249.3098039215686" y="454.0">pl.edu.agh.kis.application.dao.NotificationDao</node>
+    <node x="2068.9375" y="0.0">pl.edu.agh.kis.application.observer.Observer</node>
+    <node x="1589.3098039215686" y="421.0">pl.edu.agh.kis.application.service.NotificationService</node>
+    <node x="437.0" y="210.0">org.springframework.web.bind.annotation.RestController</node>
+    <node x="2228.9375" y="0.0">pl.edu.agh.kis.poll.core.Resolver</node>
+    <node x="1182.8098039215686" y="0.0">org.springframework.stereotype.Component</node>
+    <node x="1871.3098039215686" y="443.0">pl.edu.agh.kis.application.service.AppUserService</node>
+    <node x="994.0" y="638.0">pl.edu.agh.kis.application.external.BCrypt</node>
+    <node x="2060.0598039215683" y="188.0">pl.edu.agh.kis.poll.implementations.NewNotificationResolver</node>
+    <node x="961.3098039215686" y="443.0">pl.edu.agh.kis.application.dao.AppUserDao</node>
+    <node x="454.1073529411765" y="410.0">pl.edu.agh.kis.application.controller.AppController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="pl.edu.agh.kis.application.dao.AppUserDao" target="org.springframework.stereotype.Repository">
+      <point x="0.0" y="-58.5" />
+      <point x="1095.3098039215686" y="385.0" />
+      <point x="1194.0448529411765" y="385.0" />
+      <point x="-34.75" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.poll.implementations.NewNotificationResolver" target="pl.edu.agh.kis.poll.core.Resolver">
+      <point x="85.33333333333326" y="-47.5" />
+      <point x="2273.393137254902" y="91.0" />
+      <point x="2349.9375" y="91.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.poll.implementations.NewNotificationResolver" target="org.springframework.stereotype.Component">
+      <point x="-85.33333333333326" y="-47.5" />
+      <point x="2102.7264705882353" y="81.0" />
+      <point x="1307.9098039215685" y="81.0" />
+      <point x="55.59999999999991" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.application.controller.AppController" target="io.swagger.annotations.Api">
+      <point x="45.375" y="-91.5" />
+      <point x="680.9823529411765" y="385.0" />
+      <point x="713.5" y="385.0" />
+      <point x="0.0" y="124.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.application.service.AppUserService" target="org.springframework.stereotype.Service">
+      <point x="0.0" y="-58.5" />
+      <point x="34.75" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.poll.core.DeferredJSON" target="org.springframework.web.context.request.async.DeferredResult">
+      <point x="49.25" y="-37.0" />
+      <point x="268.25" y="1001.0" />
+      <point x="356.5" y="1001.0" />
+      <point x="0.0" y="169.0" />
+    </edge>
+    <edge source="pl.edu.agh.kis.application.controller.AppController" target="org.springframework.web.bind.annotation.RequestMapping">
+      <point x="-136.125" y="-91.5" />
+      <point x="499.4823529411765" y="385.0" />
+      <point x="310.0" y="385.0" />
+      <point x="0.0" y="102.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.poll.core.DeferredJSON" target="pl.edu.agh.kis.application.command.Command">
+      <point x="-49.25" y="-37.0" />
+      <point x="169.75" y="1001.0" />
+      <point x="81.5" y="1001.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.application.service.NotificationService" target="pl.edu.agh.kis.application.observer.Observable">
+      <point x="-65.5" y="-80.5" />
+      <point x="0.0" y="47.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.poll.core.Supervisor" target="org.springframework.stereotype.Component">
+      <point x="0.0" y="-36.5" />
+      <point x="91.5" y="71.0" />
+      <point x="1196.7098039215687" y="71.0" />
+      <point x="-55.59999999999991" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.application.controller.AppController" target="pl.edu.agh.kis.poll.core.MainController">
+      <point x="136.125" y="-91.5" />
+      <point x="771.7323529411765" y="385.0" />
+      <point x="982.8779411764706" y="385.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.poll.implementations.NewNotificationResolver" target="pl.edu.agh.kis.application.observer.Observer">
+      <point x="0.0" y="-47.5" />
+      <point x="2188.0598039215683" y="91.0" />
+      <point x="2138.9375" y="91.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.application.service.NotificationService" target="org.springframework.stereotype.Service">
+      <point x="65.5" y="-80.5" />
+      <point x="1785.8098039215686" y="385.0" />
+      <point x="1935.8098039215686" y="385.0" />
+      <point x="-34.75" y="25.5" />
+    </edge>
+    <edge source="org.springframework.stereotype.Service" target="org.springframework.stereotype.Component">
+      <point x="0.0" y="-25.5" />
+      <point x="1970.5598039215686" y="91.0" />
+      <point x="1280.1098039215685" y="91.0" />
+      <point x="27.799999999999955" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.application.dao.NotificationDao" target="org.springframework.stereotype.Repository">
+      <point x="0.0" y="-47.5" />
+      <point x="1409.3098039215686" y="385.0" />
+      <point x="1263.5448529411765" y="385.0" />
+      <point x="34.75" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.poll.core.MainController" target="org.springframework.stereotype.Component">
+      <point x="0.0" y="-25.5" />
+      <point x="982.8779411764706" y="81.0" />
+      <point x="1224.5098039215686" y="81.0" />
+      <point x="-27.799999999999955" y="25.5" />
+    </edge>
+    <edge source="org.springframework.stereotype.Repository" target="org.springframework.stereotype.Component">
+      <point x="0.0" y="-25.5" />
+      <point x="1228.7948529411765" y="91.0" />
+      <point x="1252.3098039215686" y="91.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="pl.edu.agh.kis.application.controller.AppController" target="org.springframework.web.bind.annotation.RestController">
+      <point x="-45.375" y="-91.5" />
+      <point x="590.2323529411765" y="385.0" />
+      <point x="506.5" y="385.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="1079.0" y="370.0" />
+  <SelectedNodes>
+    <node>pl.edu.agh.kis.poll.implementations.NewNotificationResolver</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

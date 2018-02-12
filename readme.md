@@ -8,7 +8,7 @@ Zalety takiego podejścia to:
 - Bardzo mała ilość zmian wymagana w aplikacji klienckiej (przy przejściu z "standardowego" pollingu do long-pollingu)
 
 Podejście to przejawia wady takie jak:
-- Zwiększenie obciążenia serwera - każde otwarte połączenie będzie zwykle absorbowało jeden wątek serwera (zwykle większość połączeń będzie w bezczynnym stanie oczekiwania)
+- Zwiększenie obciążenia serwera - każde otwarte połączenie będzie zwykle absorbowało jeden wątek serwera (zazwyczaj większość połączeń będzie w bezczynnym stanie oczekiwania)
 
 ## Opis implementacji
 
@@ -19,6 +19,43 @@ Próba ustalenia rezultatu działania w obiektach typu "Promise" następuje cykl
 ## Opis aplikacji
 
 Aby zilustrować działanie long-pollingu postanowiliśmy stworzyć aplikację do wysyłania powiadomień. Po otwarciu aplikacji, wszystkie powiadomienia są ładowane z bazy danych. Następnie, aplikacja wysyła zapytanie typu "long-polling", aby pozyskać nowe powiadomienia. Jeżeli nowe powiadomienie pojawi się, wówczas jego szczegóły zostaną zwrócone w odpowiedzi i aplikacja doda nową notyfikację do widoku aplikacji, po czym otworzy nowe zapytanie typu "long-polling", aby pozyskać kolejne powiadomienia.
+
+## Przykład użycia
+
+Aby użyć stworzonej przez nas biblioteki, kod kliencki musi wykonać następujące kroki:
+
+1. Kontroler aplikacji musi dziedziczyć po MainController
+
+```
+@RestController
+@RequestMapping("/api")
+public class AppController extends MainController {
+	...
+}
+```
+
+2. Należy zaimplementować własną klasę typu Resolver, której zadaniem jest ustalenie wyniku działania dla obiektów typu "Promise"
+
+```
+/**
+ * Resolver that is successfully resolving Promises, when new record has been added to notification table
+ */
+@Component
+public class NewNotificationResolver implements Resolver, Observer {
+	...
+}
+```
+
+3. Wraz z żądaniem typu "long-polling", do kolejki kontrolera musi zostać dodany nowy obiekt typu "Promise" reprezentujący żądanie
+```
+@RequestMapping(value = "/newNotification", method = RequestMethod.GET)
+public @ResponseBody
+DeferredJSON deferredResult() {
+    DeferredJSON result = new DeferredJSON(resolver);
+    supervisor.add(result);
+    return result;
+}
+```
 
 # Running:
 

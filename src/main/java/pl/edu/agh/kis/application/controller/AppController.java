@@ -10,11 +10,9 @@ import pl.edu.agh.kis.application.entity.AppUser;
 import pl.edu.agh.kis.application.entity.Notification;
 import pl.edu.agh.kis.poll.core.DeferredJSON;
 import pl.edu.agh.kis.poll.core.MainController;
-import pl.edu.agh.kis.poll.core.Supervisor;
 import pl.edu.agh.kis.poll.implementations.NewNotificationResolver;
 import org.json.simple.JSONObject;
 import org.springframework.http.MediaType;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 

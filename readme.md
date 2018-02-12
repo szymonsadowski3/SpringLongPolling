@@ -108,7 +108,12 @@ gdzie `classpath:/application.properties` oznacza ścieżkę do pliku konfigurac
 
 Konfiguracja aplikacji znajduje się w pliku `src/main/resources/application.properties`
 
+# Build
+
+Plik wykonywalny .jar ma nazwę `gs-spring-boot-0.1.0.jar`
+
 ## Dokumentacja
 
-- folder javadoc
-- adres `http://localhost:8080/swagger-ui.html`
+1. Javadoc - znajduje się w katalogu javadoc/
+             
+2. Swagger - znajduje się w pliku ApiDocumentation.pdf lub pod endpointem `/swagger-ui.html` po uruchomieniu aplikacji

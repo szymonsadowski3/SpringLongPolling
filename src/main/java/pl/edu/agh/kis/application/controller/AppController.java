@@ -1,5 +1,7 @@
 package pl.edu.agh.kis.application.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@Api(value="notifications_app", description="CRUD interface designed for Notifications application")
 public class AppController extends MainController {
     @Autowired
     private NewNotificationResolver resolver;
@@ -36,6 +39,7 @@ public class AppController extends MainController {
         notificationService.addObserver(resolver);
     }
 
+    @ApiOperation(value = "The newest notification in database (Note: This endpoint is designed for long-polling)", response = DeferredJSON.class)
     @RequestMapping(value = "/newNotification", method = RequestMethod.GET)
     public @ResponseBody
     DeferredJSON deferredResult() {
@@ -44,6 +48,8 @@ public class AppController extends MainController {
         return result;
     }
 
+    @ApiOperation(value = "List of all notifications fetched from database " +
+            "(Note: JSON Web Token must be specified in request)", response = Iterable.class)
     @RequestMapping(value = "/notifications", method = RequestMethod.GET)
     public List<Notification> getNotifications(@RequestParam("token") String token, @RequestParam("user") String user) {
         if (Authorizer.verifyToken(token, user)) {
@@ -53,11 +59,13 @@ public class AppController extends MainController {
         return null;
     }
 
+    @ApiOperation(value = "Details of user fetched from database by his ID", response = AppUser.class)
     @RequestMapping(value = "/user/{userid}", method = RequestMethod.GET)
     public AppUser getUser(@PathVariable("userid") int userid) {
         return appUserService.readAppUser(userid);
     }
 
+    @ApiOperation(value = "Add new user to database: request body must contain username and password")
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public JSONObject createUser(@RequestBody MultiValueMap<String,String> formData) {
         JSONObject response = new JSONObject();
@@ -76,6 +84,7 @@ public class AppController extends MainController {
         return response;
     }
 
+    @ApiOperation(value = "Add new user to database: request body must contain username and password")
     @RequestMapping(value="/notification", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> insertNotification(@RequestBody Notification notification) {
         try {
@@ -87,6 +96,7 @@ public class AppController extends MainController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @ApiOperation(value = "Start session by logging in (specify username & password) and obtain JSON Web Token in response")
     @RequestMapping(value="/login",method=RequestMethod.POST)
     public JSONObject createRole(@RequestBody MultiValueMap<String,String> formData){
         JSONObject jsonObj = new JSONObject();

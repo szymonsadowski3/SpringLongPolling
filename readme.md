@@ -78,3 +78,8 @@ DeferredJSON deferredResult() {
     - DbConnection
 
 5. Promise
+
+## Dokumentacja
+
+- folder javadoc
+- adres `http://localhost:8080/swagger-ui.html`

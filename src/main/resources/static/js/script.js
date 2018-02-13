@@ -4,6 +4,8 @@ var notificationsUrl = '/api/notifications';
 var postNotificationUrl = '/api/notification';
 var newNotificationsLongPollUrl = '/api/newNotification';
 
+var addedDates = [];
+
 var monthMapping = {
     "01": "January",
     "02": "February",
@@ -26,6 +28,14 @@ var backgroundClassMapping = {
 };
 
 var currentRequest;
+
+function pausecomp(millis)
+{
+    var date = new Date();
+    var curDate = null;
+    do { curDate = new Date(); }
+    while(curDate-date < millis);
+}
 
 function format(str, args) {
     var formatted = str;
@@ -110,7 +120,6 @@ app.controller('loginCtrl', ["$scope", "$http", "$location", "user", function ($
             },
             data: 'username=' + username + '&password=' + password
         }).then(function (response) {
-            console.dir(response);
             if (response.data.authorized) {
                 user.userLoggedIn();
                 user.setName(response.data.user);
@@ -162,7 +171,6 @@ app.controller('registerCtrl', ["$scope", "$http", "$location", "user", function
             },
             data: 'username=' + username + '&password=' + password
         }).then(function (response) {
-            console.dir(response);
             if (response.data.success) {
                 user.userLoggedIn();
                 user.setName(response.data.user);
@@ -183,8 +191,6 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
     $("#spinner").show();
 
     function updateNotificationFields(obj) {
-        console.log("updateNotificationFields");
-        console.dir(obj);
         var createdOnSplitted = obj.createdOn.split(' ');
         var dateString = createdOnSplitted[0];
         var timeString = createdOnSplitted[1];
@@ -205,7 +211,6 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
                     updateNotificationFields(obj);
                 });
 
-                console.dir(notificationList.notifications);
                 $("#spinner").hide();
             },
             function (response) {
@@ -214,34 +219,18 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
             }
         );
 
-    function pollNotification() {
-        $http.get(newNotificationsLongPollUrl, {timeout: 600000}) // IMPORTANT: Timeout value
-            .then(
-                function (response) {
-                    alert('xDDD');
-                    // success callback
-                    var newData = response.data;
-                    updateNotificationFields(newData);
-                    console.dir(newData);
-                    newData.isNew = true;
-                    notificationList.notifications.unshift(newData);
-                    notificationList.notifications.push({});
-                    notificationList.notifications.pop();
-                    $scope.$applyAsync();
-                    // pollNotification();
-                },
-                function (response) {
-                    // failure call back
-                }
-            );
-    }
-
     function pollNewNotification() {
+        console.log("Polling new notification");
         currentRequest = $.get(newNotificationsLongPollUrl, function (response) {
             // success callback
             updateNotificationFields(response);
             response.isNew = true;
-            $('#notificationsWrapper').prepend(renderCard(response));
+
+            if (addedDates.indexOf(response.createdOn)  == -1) {
+                $('#notificationsWrapper').prepend(renderCard(response));
+                addedDates.push(response.createdOn);
+            }
+
             setTimeout(pollNewNotification, 250);
         });
     }
@@ -249,6 +238,7 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
     pollNewNotification();
 
     notificationList.addNotification = function () {
+        currentRequest.abort();
         $http.post(postNotificationUrl, JSON.stringify({
             title: notificationList.newNotification.title,
             content: notificationList.newNotification.content,
@@ -259,12 +249,12 @@ app.controller('dashboardCtrl', ['$scope', '$http', '$interval', 'user', functio
                 function (response) {
                     // success callback
                     currentRequest.abort();
-                    setTimeout(pollNewNotification, 250);
+                    setTimeout(pollNewNotification, 1000);
                 },
                 function (response) {
                     // failure call back
                     currentRequest.abort();
-                    setTimeout(pollNewNotification, 250);
+                    setTimeout(pollNewNotification, 1000);
                 }
             );
     };

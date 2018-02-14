@@ -82,12 +82,6 @@ DeferredJSON deferredResult() {
 
     - DbConnection
 
-5. Promise
-
-    Poniższa klasa realizuje wzorzec "Promise", gdyż reprezentuje początkowo nieznany wynik jakiegoś działania, który może zostać ustalony w przyszłości
-
-    - DeferredJSON
-
 # Uruchamianie aplikacji:
 
 1. W pierwszym kroku należy zaimportować zależności: 

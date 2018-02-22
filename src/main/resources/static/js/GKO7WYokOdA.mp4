@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta property="og:title" content="Image Hosting Made Easy" />
+    <meta property="og:type" content="video" />
+    <meta property="og:url" content="https://imgtc.com/w/" />
+    <meta property="og:video:secure_url" content="https://imgtc.b-cdn.net/uploads/GKO7WYokOdA.mp4" />
+    <meta property="og:video:type" content="video/mp4" />
+    <meta property="og:video:width" content="400" />
+    <meta property="og:video:height" content="300" />
+    <meta property="og:image" content="" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=”shortcut icon” href=”/favicon.ico” type=”image/x-icon”/>
+    <meta name="google-site-verification" content="O-eYMPBOCxkGxiI6Kk4hYmGOjA3zclz9Er2BJcPhBaA"/>
+    <meta name="google-site-verification" content="7p74[r bOiqiMXES-GRI8F7WrKELQvqCbvoe2VHz9Fp43s"/>
+    <meta name="generator" content="HTML Tidy for Windows (vers 14 February 2006), see www.w3.org">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://vjs.zencdn.net/5.8.8/video-js.min.css" rel="stylesheet">
+    <script src="https://vjs.zencdn.net/5.8.8/video.min.js"></script>
+    <title>
+        ImgTC
+    </title>
+    <link rel="stylesheet" type="text/css" href="https://imgtc.com/bootstrap.css">
+</head>
+<body>
+    <style type="text/css">
+.banner_adslot { display: inline-block; width: 100%; text-align: center; margin-top: 5px;}
+@media (max-width: 480px) { .banner_adslot { display: none; } }
+</style>
+
+<div class="banner_adslot">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Responsive Leaderboard -->
+<ins class="adsbygoogle banner_adslot"
+     style="display:block"
+     data-ad-client="ca-pub-1389701005436364"
+     data-ad-slot="7231076825"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<div class="container-fluid-video" style="background-color: #222222;">
+
+<div class="col-xs-12 col-md-12 col-lg-12" style="padding: 0px; margin: 0 auto; float: none;">
+            <div class="embed-responsive embed-responsive-16by9" style="border: 1px solid black; border-top: none;"><video controls preload="auto" autoplay><source src="https://cdn.imgtc.com/uploads/GKO7WYokOdA.mp4" type='video/mp4'></video></div>
+            <span style="margin-top: 5px; float: left; color: white;"><a href="https://imgtc.com/contact">Contact Us</a></span>
+            </div>
+</div>
+
+</div>
+
+<style type="text/css">
+.mobile_adslot { display: inline-block; width: 100%; text-align: center; margin-top: 5px;}
+@media (min-width: 480px) { .mobile_adslot { display: none; } }
+</style>
+
+<div class="mobile_adslot">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Mobile Rectangle -->
+<ins class="adsbygoogle mobile_adslot"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-1389701005436364"
+     data-ad-slot="9895485485"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3038758-86', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

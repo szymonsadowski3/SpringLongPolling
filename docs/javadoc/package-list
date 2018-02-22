@@ -1,0 +1,12 @@
+pl.edu.agh.kis
+pl.edu.agh.kis.application.auth
+pl.edu.agh.kis.application.command
+pl.edu.agh.kis.application.connectivity
+pl.edu.agh.kis.application.controller
+pl.edu.agh.kis.application.dao
+pl.edu.agh.kis.application.entity
+pl.edu.agh.kis.application.external
+pl.edu.agh.kis.application.observer
+pl.edu.agh.kis.application.service
+pl.edu.agh.kis.poll.core
+pl.edu.agh.kis.poll.implementations

@@ -53,6 +53,7 @@ public class AppController extends MainController {
     @RequestMapping(value = "/notifications", method = RequestMethod.GET)
     public List<Notification> getNotifications(@RequestParam("token") String token, @RequestParam("user") String user) {
         if (Authorizer.verifyToken(token, user)) {
+            List<Notification> result = notificationService.getNotifications();
             return notificationService.getNotifications();
         }
 

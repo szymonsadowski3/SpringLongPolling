@@ -58,3 +58,14 @@ wher `classpath:/application.properties` means path to apllication's config file
 # Configuration
 
 Configuration is located in `src/main/resources/application.properties`
+
+## Example application screens
+
+![main](https://raw.githubusercontent.com/szymonsadowski3/SpringLongPolling/master/docs/screens/loginPage.png)
+
+----
+
+----
+
+![dashboard](https://raw.githubusercontent.com/szymonsadowski3/SpringLongPolling/master/docs/screens/dashboard.png)
+

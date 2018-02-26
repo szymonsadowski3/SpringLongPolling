@@ -4,7 +4,7 @@ This project is an implementation of the server-push mechanism with the use of l
 
 ## Example usage
 
-Aby użyć stworzonej przez nas biblioteki, kod kliencki musi wykonać następujące kroki:
+In order to use this library, client code should do this steps:
 
 1. Application controller should inherit from MainController
 
@@ -16,7 +16,7 @@ public class AppController extends MainController {
 }
 ```
 
-2. In order to use this library there is need to create custom class of type Resolver, which serves as "helper" who finds out value of DeferredJSON objects (these are "Promise objects"). 
+2. You need to create custom class (that implements Resolver), which will be serving as "helper" who determines values of DeferredJSON objects (these are "Promise objects" which represent future result of some operation). 
 
 ```
 /**
@@ -28,7 +28,7 @@ public class NewNotificationResolver implements Resolver, Observer {
 }
 ```
 
-3. After receiving "long-polling" request, to controller's queque there should be appended new DeferredJSON obejct, which represents future result of this certain request.
+3. After receiving "long-polling" request there should be created DeferredJSON object, which will represent future result of this request. In the next step - this DeferredJSON object should be appended to tasks queue (by `supervisor.add(result);`)
 ```
 @RequestMapping(value = "/newNotification", method = RequestMethod.GET)
 public @ResponseBody
